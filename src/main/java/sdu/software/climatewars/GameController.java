@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 
-public class RoomController {
+public class GameController {
     // Background image for room
     @FXML
     private ImageView backgroundImage;
@@ -77,7 +77,7 @@ public class RoomController {
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
-        System.out.println("Option 2 chosen");
+        System.out.println("Option 1 chosen");
     }
 
     @FXML
