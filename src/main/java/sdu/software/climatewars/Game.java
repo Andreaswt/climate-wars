@@ -1,10 +1,15 @@
 package sdu.software.climatewars;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Game {
+public class Game extends Application {
     private final ArrayList<Challenge> challenges;
     private final Parser parser;
     private Room currentRoom;
@@ -18,10 +23,23 @@ public class Game {
         parser = new Parser();
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("game.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Climate Wars");
+        stage.setScene(scene);
+        stage.show();
+
+        // How to access labels etc in controllers from start method
+        GameController rc = fxmlLoader.getController();
+        rc.setStatsText("Yeet");
+    }
+
     private void createRooms() {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        city = new Room("in an abandoned cityy");
+        city = new Room("in an abandoned city");
         forest = new Room("in a dark forest", getRandomChallenge());
         cliffs = new Room("at the cliffs", getRandomChallenge());
         hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
@@ -74,6 +92,8 @@ public class Game {
     }
 
     public void play() {
+        launch();
+
         printWelcome();
 
         boolean finished = false;

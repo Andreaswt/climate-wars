@@ -80,7 +80,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>sdu.software.climatewars/sdu.software.climatewars.HelloApplication</mainClass>
+                            <mainClass>sdu.software.climatewars/sdu.software.climatewars.Game</mainClass>
                         </configuration>
                     </execution>
                 </executions>
