@@ -2,6 +2,7 @@ package sdu.software.climatewars;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class HelloController {
     @FXML
@@ -11,4 +12,5 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
 }

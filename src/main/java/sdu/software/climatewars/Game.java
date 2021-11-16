@@ -21,7 +21,7 @@ public class Game {
     private void createRooms() {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
 
-        city = new Room("in an abandoned cityy");
+        city = new Room("in an abandoned city");
         forest = new Room("in a dark forest", getRandomChallenge());
         cliffs = new Room("at the cliffs", getRandomChallenge());
         hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
