@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -97,5 +98,29 @@
             <Font size="12.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="textBox1" layoutX="704.0" layoutY="441.0" prefHeight="161.0" prefWidth="299.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <Label fx:id="title1" layoutX="9.0" layoutY="-9.0" prefHeight="58.0" prefWidth="280.0" text="SCENARIO:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="description1" alignment="TOP_LEFT" layoutX="10.0" layoutY="31.0" prefHeight="83.0" prefWidth="260.0" style="-fx-wrap-text: true;" text="Your group has encountered another group of survivors numbering XX people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Button fx:id="button1" layoutX="219.0" layoutY="104.0" mnemonicParsing="false" onAction="#button1Action" prefHeight="33.0" prefWidth="68.0" style="-fx-wrap-text: true;" text="knap1">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="textInput1" layoutX="21.0" layoutY="102.0" prefHeight="39.0" prefWidth="175.0" text="djlsnflsndf">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

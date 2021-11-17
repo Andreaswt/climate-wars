@@ -1,8 +1,10 @@
 package sdu.software.climatewars;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -28,6 +30,27 @@ public class Game extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Climate Wars");
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()) {
+                    case UP:
+                        System.out.println("n");
+                        break;
+                    case DOWN:
+                        System.out.println("s");
+                        break;
+                    case LEFT:
+                        System.out.println("w");
+                        break;
+                    case RIGHT:
+                        System.out.println("e");
+                        break;
+                }
+            }
+        });
+
         stage.setScene(scene);
         stage.show();
 

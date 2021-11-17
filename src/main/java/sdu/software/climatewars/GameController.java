@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -71,6 +72,22 @@ public class GameController {
     @FXML
     private Label groupSizeText;
 
+    // Centered text box
+    @FXML
+    private AnchorPane textBox1;
+
+    @FXML
+    private Label title1;
+
+    @FXML
+    private Label description1;
+
+    @FXML
+    private Button button1;
+
+    @FXML
+    private TextArea textInput1;
+
     // Character
     @FXML
     private ImageView characterImage;
@@ -83,6 +100,11 @@ public class GameController {
     @FXML
     protected void optionTwoAction(ActionEvent actionEvent) {
         System.out.println("Option 2 chosen");
+    }
+
+    @FXML
+    protected void button1Action(ActionEvent actionEvent) {
+        System.out.println("Button 1 activated");
     }
 
     public void setStatsText(String text) {
