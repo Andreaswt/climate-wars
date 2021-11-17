@@ -81,17 +81,18 @@ public class Group {
         System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
-    public void printStats() {
-        System.out.println();
-        System.out.println("---- Your stats are ----");
+    public String getStats() {
+        String aString = "\n";
 
-        System.out.println("Food: " + food);
+        aString += "---- Your stats are ----\n";
 
-        System.out.println();
-        System.out.println("Group satiety: " + this.satiety + "%");
+        aString += "Food: " + String.valueOf(food) + "\n\n";
 
-        System.out.println();
-        System.out.println("Group size: " + ((members != null) ? getGroupSize() : "No members"));
+        aString += "Group satiety: " + String.valueOf(this.satiety) + "% \n\n";
+
+        aString += "Group size: " + ((members != null) ? String.valueOf(getGroupSize()) : "No members");
+
+        return aString;
     }
 
     public int getGroupSize() {
