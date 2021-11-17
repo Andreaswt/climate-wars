@@ -72,7 +72,7 @@ public class GameController {
     @FXML
     private Label groupSizeText;
 
-    // Centered text box
+    // Bottom right corner text box
     @FXML
     private AnchorPane textBox1;
 
@@ -107,8 +107,8 @@ public class GameController {
         System.out.println("Button 1 activated");
     }
 
-    public void setStatsText(String text) {
-        this.statsText.setText(text);
+    public void setDescription1(String text) {
+        this.description1.setText(text);
     }
 
     /* ---------------- Methods to be implemented: ---------------- */

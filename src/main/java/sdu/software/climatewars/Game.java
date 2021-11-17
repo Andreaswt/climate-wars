@@ -56,7 +56,7 @@ public class Game extends Application {
 
         // How to access labels etc in controllers from start method
         GameController rc = fxmlLoader.getController();
-        rc.setStatsText("Yeet");
+        rc.setDescription1(getWelcome());
     }
 
     private void createRooms() {
@@ -117,7 +117,7 @@ public class Game extends Application {
     public void play() {
         launch();
 
-        printWelcome();
+        getWelcome();
 
         boolean finished = false;
         while (!finished) {
@@ -188,21 +188,21 @@ public class Game extends Application {
         return this.challenges.get(index);
     }
 
-    private void printWelcome() {
-        System.out.println();
-        System.out.println("\033[1mWelcome to the Climate Wars!\033[0m");
-        System.out.println("Climate Wars will teach you about the disastrous effects of climate change.");
+    private String getWelcome() {
+        String aString = "";
+
+        aString += "Welcome to the Climate Wars! \n";
+        aString += "Climate Wars will teach you about the disastrous effects of climate change. \n \n";
 
         // Back story
-        System.out.println();
-        System.out.println("Back story: The year is 2130, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs." + "\n" + "This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth." + "\n" + "The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments." + "\n" + "You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group." + "\n" + "Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world." + "\n" + "Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.");
-        System.out.println("Good luck survivor.");
-        System.out.println();
+        aString += "Back story: The year is 2130, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs." + "\n" + "This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth." + "\n" + "The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments." + "\n" + "You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group." + "\n" + "Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world." + "\n" + "Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.";
+        aString += "Good luck survivor. \n \n";
 
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.\n");
-        System.out.println("Your initial stats are: ");
-        group.printStats();
-        System.out.println(currentRoom.getLongDescription());
+        aString += "Type '" + CommandWord.HELP + "' if you need help.\n \n";
+        aString += "Your initial stats are: \n";
+        aString += group.getStats();
+        aString += currentRoom.getLongDescription();
+        return aString;
     }
 
     private boolean processCommand(Command command) {
@@ -218,7 +218,7 @@ public class Game extends Application {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.STATS) {
-            group.printStats();
+            group.getStats();
         } else {
             if (commandWord == CommandWord.UNKNOWN) {
                 System.out.println("I don't know what you mean...");
@@ -228,7 +228,7 @@ public class Game extends Application {
                 for (String s : currentRoom.getChallenges().getOptions()) {
                     if (s.contains(commandWord.getCommandString())) {
                         currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
-                        group.printStats();
+                        group.getStats();
                         currentRoom.setChallenges(null);
                         return wantToQuit;
                     }

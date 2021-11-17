@@ -115,7 +115,7 @@
                   <Font size="10.0" />
                </font>
             </Button>
-            <TextArea fx:id="textInput1" layoutX="21.0" layoutY="102.0" prefHeight="39.0" prefWidth="175.0" text="djlsnflsndf">
+            <TextArea fx:id="textInput1" layoutX="21.0" layoutY="102.0" prefHeight="39.0" prefWidth="175.0" text="">
                <font>
                   <Font size="10.0" />
                </font>
