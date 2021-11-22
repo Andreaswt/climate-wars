@@ -127,7 +127,7 @@ public class Game extends Application {
     private void readFromFile() {
         //Read file
         try {
-            File myObj = new File("src/main/java/sdu/software/climatewars/Challenges.txt");
+            File myObj = new File("src/main/java/sdu/software/climatewars/Domain/Challenges.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
