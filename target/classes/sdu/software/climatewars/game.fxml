@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sdu.software.climatewars.GameController">
+<AnchorPane onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sdu.software.climatewars.GameController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="1009.0" layoutX="-7.0" pickOnBounds="true">
          <image>
@@ -75,7 +76,7 @@
          </font>
       </Label>
       <Pane fx:id="southDoor" layoutX="498.0" layoutY="575.0" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: white;" />
-      <ImageView fx:id="characterImage" fitHeight="124.0" fitWidth="45.0" layoutX="512.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player" fitHeight="124.0" fitWidth="45.0" layoutX="512.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@player_19.png" />
          </image>
@@ -97,9 +98,9 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="textBox1" layoutX="366.0" layoutY="223.0" prefHeight="161.0" prefWidth="299.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <AnchorPane fx:id="textBox1" layoutX="704.0" layoutY="441.0" prefHeight="161.0" prefWidth="299.0" style="-fx-background-color: white; -fx-border-color: black;">
          <children>
-            <Label fx:id="title1" layoutX="119.0" layoutY="-9.0" prefHeight="58.0" prefWidth="79.0" text="SCENARIO:">
+            <Label fx:id="title1" layoutX="9.0" layoutY="-9.0" prefHeight="58.0" prefWidth="280.0" text="SCENARIO:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -109,11 +110,16 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Button fx:id="button1" layoutX="92.0" layoutY="104.0" mnemonicParsing="false" onAction="#optionOneAction" prefHeight="33.0" prefWidth="126.0" style="-fx-wrap-text: true;" text="knap1">
+            <Button fx:id="button1" layoutX="219.0" layoutY="104.0" mnemonicParsing="false" onAction="#button1Action" prefHeight="33.0" prefWidth="68.0" style="-fx-wrap-text: true;" text="knap1">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
+            <TextArea fx:id="textInput1" layoutX="21.0" layoutY="102.0" prefHeight="39.0" prefWidth="175.0" text="djlsnflsndf">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextArea>
          </children>
       </AnchorPane>
    </children>

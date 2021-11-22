@@ -1,5 +1,6 @@
 package sdu.software.climatewars;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ public class Game extends Application {
     private final Parser parser;
     private Room currentRoom;
     private final Group group;
+    boolean goNorth, goSouth, goEast, goWest;
 
     public Game() {
         this.group = new Group();
@@ -30,33 +32,14 @@ public class Game extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Climate Wars");
+        stage.setResizable(false);
 
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case UP:
-                        System.out.println("n");
-                        break;
-                    case DOWN:
-                        System.out.println("s");
-                        break;
-                    case LEFT:
-                        System.out.println("w");
-                        break;
-                    case RIGHT:
-                        System.out.println("e");
-                        break;
-                }
-            }
-        });
+        // How to access labels etc in controllers from start method
+        GameController rc = fxmlLoader.getController();
 
         stage.setScene(scene);
         stage.show();
 
-        // How to access labels etc in controllers from start method
-        GameController rc = fxmlLoader.getController();
-        rc.setStatsText("Yeet");
     }
 
     private void createRooms() {
