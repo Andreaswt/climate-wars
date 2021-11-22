@@ -33,7 +33,15 @@ public class Game extends Application {
 
         // How to access labels etc in controllers from start method
         GameController rc = fxmlLoader.getController();
-        rc.setStatsText("Yeet");
+        rc.setStatsText("Stats");
+        rc.setOptionOneButton("Knap 1");
+        rc.setOptionTwoButton("Knap 2");
+        rc.setScenarioDescription("Scenario description");
+        rc.setScenarioText("Scenario");
+        rc.setBackgroundImage("Beach");
+        rc.hideStats();
+        //rc.setCharacterImageImage();
+
     }
 
     private void createRooms() {
