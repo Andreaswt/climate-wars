@@ -1,4 +1,4 @@
-package sdu.software.climatewars;
+package sdu.software.climatewars.Domain;
 
 import java.util.ArrayList;
 

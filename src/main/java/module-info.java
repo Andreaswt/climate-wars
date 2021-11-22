@@ -9,4 +9,10 @@ module sdu.software.climatewars {
 
     opens sdu.software.climatewars to javafx.fxml;
     exports sdu.software.climatewars;
+    exports sdu.software.climatewars.Domain;
+    opens sdu.software.climatewars.Domain to javafx.fxml;
+    exports sdu.software.climatewars.Text;
+    opens sdu.software.climatewars.Text to javafx.fxml;
+    exports sdu.software.climatewars.GUI;
+    opens sdu.software.climatewars.GUI to javafx.fxml;
 }

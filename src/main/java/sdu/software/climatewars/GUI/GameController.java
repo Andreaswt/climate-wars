@@ -1,4 +1,4 @@
-package sdu.software.climatewars;
+package sdu.software.climatewars.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,4 +1,7 @@
-package sdu.software.climatewars;
+package sdu.software.climatewars.Text;
+
+import sdu.software.climatewars.Text.Command;
+import sdu.software.climatewars.Text.CommandWords;
 
 import java.util.Scanner;
 

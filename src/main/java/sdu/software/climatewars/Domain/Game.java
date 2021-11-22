@@ -1,9 +1,13 @@
-package sdu.software.climatewars;
+package sdu.software.climatewars.Domain;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sdu.software.climatewars.GUI.GameController;
+import sdu.software.climatewars.Text.Parser;
+import sdu.software.climatewars.Text.Command;
+import sdu.software.climatewars.Text.CommandWord;
 
 import java.io.File;
 import java.io.FileNotFoundException;

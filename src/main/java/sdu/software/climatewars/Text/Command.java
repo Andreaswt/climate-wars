@@ -17,7 +17,7 @@
  * @version 2006.03.30
  */
 
-package sdu.software.climatewars;
+package sdu.software.climatewars.Text;
 
 public class Command
 {

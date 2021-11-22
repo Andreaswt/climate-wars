@@ -1,4 +1,6 @@
-package sdu.software.climatewars;
+package sdu.software.climatewars.Text;
+import sdu.software.climatewars.Text.CommandWord;
+
 import java.util.HashMap;
 
 
