@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 enum DirectionEnum {
     UP,
@@ -18,9 +21,6 @@ enum DirectionEnum {
     RIGHT,
     LEFT
 }
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 
 public class GameController {
     // Background image for room
@@ -140,7 +140,7 @@ public class GameController {
         String characterPath = "src/main/resources/character/" + characterName + ".png";
         FileInputStream inputStream = new FileInputStream(characterPath);
         Image character = new Image(inputStream);
-        this.characterImage.setImage(character);
+        this.player.setImage(character);
     }
 
     public void hideStats(){

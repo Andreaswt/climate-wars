@@ -17,7 +17,6 @@ public class Game extends Application {
     private final Parser parser;
     private Room currentRoom;
     private final Group group;
-    boolean goNorth, goSouth, goEast, goWest;
 
     public Game() {
         this.group = new Group();
