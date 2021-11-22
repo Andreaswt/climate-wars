@@ -2,7 +2,6 @@ package sdu.software.climatewars.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -11,18 +10,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-enum DirectionEnum {
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT
-}
+import java.util.Map;
 
 public class GameController {
+    Room currentRoom;
+    Room northRoom, southRoom, eastRoom, westRoom;
+    Group group;
+
     // Background image for room
     @FXML
     private ImageView backgroundImage;
@@ -108,10 +105,42 @@ public class GameController {
         }
     }
 
+    public void setupRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
 
-    //set text for stats og scenarios
-    public void setStatsText(String text) {
-        this.statsText.setText(text);
+        // Clear all doors
+        showNorth(false, "");
+        showSouth(false, "");
+        showEast(false, "");
+        showWest(false, "");
+
+        // Set default room
+        for (Map.Entry<String, Room> entry : this.currentRoom.getExits().entrySet()) {
+            String key = entry.getKey();
+            Room value = entry.getValue();
+
+            // If name contains "north", "south", "east" og "west", create the doors
+            if (key.contains("north")) {
+                this.northRoom = value;
+                showNorth(true, key.replace("north: ", ""));
+            }
+            if (key.contains("south")) {
+                this.southRoom = value;
+                showSouth(true, key.replace("south: ", ""));
+            }
+
+            if (key.contains("east")) {
+                this.eastRoom = value;
+                showEast(true, key.replace("east: ", ""));
+            }
+
+            if (key.contains("west")) {
+                this.westRoom = value;
+                showWest(true, key.replace("west: ", ""));
+            }
+        }
+
+        loadNewScene(currentRoom);
     }
 
     public void movePlayer(int dx, int dy) {
@@ -120,33 +149,52 @@ public class GameController {
         player.setX(player.getX() + dx);
         player.setY(player.getY() + dy);
 
-        if(checkDoorCollision())
-            // Load new scene
-            return;
+        // Check if player walked into door, and change scene hereafter
+        checkDoorCollision();
     }
 
     // Collision detection
-    public Boolean checkDoorCollision(){
+    public void checkDoorCollision(){
         if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())){
-            System.out.println("YEEEET");
-            return true;
+            setupRoom(northRoom);
+            setPlayerDefaultPosition();
         }
-        return false;
+        else if (player.getBoundsInParent().intersects(southDoor.getBoundsInParent())){
+            setupRoom(southRoom);
+            setPlayerDefaultPosition();
+        }
+        else if (player.getBoundsInParent().intersects(eastDoor.getBoundsInParent())){
+            setupRoom(eastRoom);
+            setPlayerDefaultPosition();
+        }
+        else if (player.getBoundsInParent().intersects(westDoor.getBoundsInParent())){
+            setupRoom(westRoom);
+            setPlayerDefaultPosition();
+        }
     }
 
-    /* ---------------- Methods to be implemented: ---------------- */
-    public void setOptionOneButton(String text){this.optionOneButton.setText(text);}
+    public void loadNewScene(Room room) {
+            setBackgroundImage(room.getBackgroundImage());
 
-    public void setOptionTwoButton(String text){this.optionTwoButton.setText(text);}
+            // First room "City", won't have a challenge
+            if (room.getName() != "City") {
+                showScenario(true, room);
+            }
+            else {
+                showScenario(false, room);
+            }
+    }
 
-    public void setScenarioDescription(String text){this.scenarioDescription.setText(text);}
-    public void setScenarioText(String text){this.scenarioText.setText(text);}
-
-    public void setBackgroundImage (String backgroundName) throws FileNotFoundException {
-        String backgroundPath = "src/main/resources/baggrunde/" + backgroundName + ".png";
-        FileInputStream inputStream = new FileInputStream(backgroundPath);
-        Image background = new Image(inputStream);
-        this.backgroundImage.setImage(background);
+    public void setBackgroundImage (String backgroundName) {
+        try {
+            String backgroundPath = "src/main/resources/baggrunde/" + backgroundName + ".png";
+            FileInputStream inputStream = new FileInputStream(backgroundPath);
+            Image background = new Image(inputStream);
+            this.backgroundImage.setImage(background);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Background not found");
+        }
     }
 
     public void setCharacterImageImage (String characterName) throws FileNotFoundException {
@@ -156,54 +204,98 @@ public class GameController {
         this.player.setImage(character);
     }
 
-    public void hideStats(){
-        groupSatietyText.setVisible(false);
-        groupSizeText.setVisible(false);
-        foodText.setVisible(false);
-        statsBox.setVisible(false);
+    public void showStats(Boolean show, Group group){
+        if (group != null) {
+            this.group = group;
+        }
+
+        // Visibility
+        groupSatietyText.setVisible(show);
+        groupSizeText.setVisible(show);
+        foodText.setVisible(show);
+        statsBox.setVisible(show);
+
+        // Set text
+        groupSatietyText.setText(String.valueOf("Group satiety: " + this.group.getSatiety()));
+        groupSizeText.setText(String.valueOf("Group size: " + this.group.getGroupSize()));
+        foodText.setText(String.valueOf("Food: " + this.group.getFood()));
     }
 
-    public void hideScenario(){
-        scenarioDescription.setVisible(false);
-        scenarioText.setVisible(false);
-        scenarioBox.setVisible(false);
-        optionOneButton.setVisible(false);
-        optionTwoButton.setVisible(false);
+    public void showScenario(Boolean show, Room room) {
+        // Visibility
+        scenarioDescription.setVisible(show);
+        scenarioText.setVisible(show);
+        scenarioBox.setVisible(show);
+        optionOneButton.setVisible(show);
+        optionTwoButton.setVisible(show);
+
+        // If show is false, no need to set the text
+        if (!show)
+            return;
+
+        // Text
+        this.scenarioText.setText(room.getChallenge().getName());
+        this.scenarioDescription.setText(room.getChallenge().getDescription());
+
+        // Options
+        var options = room.getChallenge().getOptions();
+        if (options.size() == 0) {
+            setFirstOption(false, "");
+            setSecondOption(false, "");
+        }
+        else if (options.size() == 1) {
+            setFirstOption(true, options.get(0));
+        }
+        else if (options.size() == 2) {
+            setFirstOption(true, options.get(0));
+            setSecondOption(true, options.get(1));
+        }
     }
 
-    public void hideNorth(){
-        northText.setVisible(false);
-        northDoor.setVisible(false);
+    public void setFirstOption(Boolean show, String name) {
+        optionOneButton.setVisible(show);
+        optionOneButton.setText(name);
     }
 
-    public void hideSouth(){
-        southText.setVisible(false);
-        southDoor.setVisible(false);
+    public void setSecondOption(Boolean show, String name) {
+        optionTwoButton.setVisible(show);
+        optionTwoButton.setText(name);
     }
 
-    public void hideEast(){
-        eastText.setVisible(false);
-        eastDoor.setVisible(false);
+    public void showNorth(Boolean show, String text){
+        northText.setText(text);
+        northText.setVisible(show);
+        northDoor.setVisible(show);
     }
 
-    public void hideWest(){
-        westDoor.setVisible(false);
-        westText.setVisible(false);
+    public void showSouth(Boolean show, String text){
+        southText.setText(text);
+        southText.setVisible(show);
+        southDoor.setVisible(show);
     }
 
-    public void showStats(){
-        groupSatietyText.setVisible(true);
-        groupSizeText.setVisible(true);
-        foodText.setVisible(true);
-        statsBox.setVisible(true);
+    public void showEast(Boolean show, String text){
+        eastText.setText(text);
+        eastText.setVisible(show);
+        eastDoor.setVisible(show);
     }
 
-    public void showScenario(){
-        scenarioDescription.setVisible(true);
-        scenarioText.setVisible(true);
-        scenarioBox.setVisible(true);
-        optionOneButton.setVisible(true);
-        optionTwoButton.setVisible(true);
+    public void showWest(Boolean show, String text){
+        westText.setText(text);
+        westText.setVisible(show);
+        westDoor.setVisible(show);
     }
 
+    public void setPlayerDefaultPosition() {
+        player.setX(0);
+        player.setY(0);
+    }
+
+    public void hidePetersBox() {
+        textBox1.setVisible(false);
+        title1.setVisible(false);
+        description1.setVisible(false);
+        button1.setVisible(false);
+        textInput1.setVisible(false);
+    }
 }
