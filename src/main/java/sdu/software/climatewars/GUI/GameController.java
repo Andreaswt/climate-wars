@@ -2,6 +2,8 @@ package sdu.software.climatewars.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import sdu.software.climatewars.Domain.Group;
+import sdu.software.climatewars.Domain.Room;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -10,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import sdu.software.climatewars.Domain.Room;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -84,8 +87,7 @@ public class GameController {
     }
 
     @FXML
-    private void handleOnKeyPressed(KeyEvent event)
-    {
+    private void handleOnKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
             case UP -> movePlayer(0, -10);
             case DOWN -> movePlayer(0, 10);
@@ -95,8 +97,7 @@ public class GameController {
     }
 
     @FXML
-    private void handleOnKeyReleased(KeyEvent event)
-    {
+    private void handleOnKeyReleased(KeyEvent event) {
         switch (event.getCode()) {
             case UP -> movePlayer(0, -10);
             case DOWN -> movePlayer(0, 10);
@@ -154,57 +155,51 @@ public class GameController {
     }
 
     // Collision detection
-    public void checkDoorCollision(){
-        if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())){
+    public void checkDoorCollision() {
+        if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())) {
             setupRoom(northRoom);
             setPlayerDefaultPosition();
-        }
-        else if (player.getBoundsInParent().intersects(southDoor.getBoundsInParent())){
+        } else if (player.getBoundsInParent().intersects(southDoor.getBoundsInParent())) {
             setupRoom(southRoom);
             setPlayerDefaultPosition();
-        }
-        else if (player.getBoundsInParent().intersects(eastDoor.getBoundsInParent())){
+        } else if (player.getBoundsInParent().intersects(eastDoor.getBoundsInParent())) {
             setupRoom(eastRoom);
             setPlayerDefaultPosition();
-        }
-        else if (player.getBoundsInParent().intersects(westDoor.getBoundsInParent())){
+        } else if (player.getBoundsInParent().intersects(westDoor.getBoundsInParent())) {
             setupRoom(westRoom);
             setPlayerDefaultPosition();
         }
     }
 
     public void loadNewScene(Room room) {
-            setBackgroundImage(room.getBackgroundImage());
+        setBackgroundImage(room.getBackgroundImage());
+        showScenario(false, room);
 
-            // First room "City", won't have a challenge
-            if (room.getName() != "City") {
-                showScenario(true, room);
-            }
-            else {
-                showScenario(false, room);
-            }
+        // First room "City", won't have a challenge
+        if (room.getName() != "City") {
+            showScenario(true, room);
+        }
     }
 
-    public void setBackgroundImage (String backgroundName) {
+    public void setBackgroundImage(String backgroundName) {
         try {
             String backgroundPath = "src/main/resources/baggrunde/" + backgroundName + ".png";
             FileInputStream inputStream = new FileInputStream(backgroundPath);
             Image background = new Image(inputStream);
             this.backgroundImage.setImage(background);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Background not found");
         }
     }
 
-    public void setCharacterImageImage (String characterName) throws FileNotFoundException {
+    public void setCharacterImageImage(String characterName) throws FileNotFoundException {
         String characterPath = "src/main/resources/character/" + characterName + ".png";
         FileInputStream inputStream = new FileInputStream(characterPath);
         Image character = new Image(inputStream);
         this.player.setImage(character);
     }
 
-    public void showStats(Boolean show, Group group){
+    public void showStats(Boolean show, Group group) {
         if (group != null) {
             this.group = group;
         }
@@ -242,11 +237,9 @@ public class GameController {
         if (options.size() == 0) {
             setFirstOption(false, "");
             setSecondOption(false, "");
-        }
-        else if (options.size() == 1) {
+        } else if (options.size() == 1) {
             setFirstOption(true, options.get(0));
-        }
-        else if (options.size() == 2) {
+        } else if (options.size() == 2) {
             setFirstOption(true, options.get(0));
             setSecondOption(true, options.get(1));
         }
@@ -262,25 +255,25 @@ public class GameController {
         optionTwoButton.setText(name);
     }
 
-    public void showNorth(Boolean show, String text){
+    public void showNorth(Boolean show, String text) {
         northText.setText(text);
         northText.setVisible(show);
         northDoor.setVisible(show);
     }
 
-    public void showSouth(Boolean show, String text){
+    public void showSouth(Boolean show, String text) {
         southText.setText(text);
         southText.setVisible(show);
         southDoor.setVisible(show);
     }
 
-    public void showEast(Boolean show, String text){
+    public void showEast(Boolean show, String text) {
         eastText.setText(text);
         eastText.setVisible(show);
         eastDoor.setVisible(show);
     }
 
-    public void showWest(Boolean show, String text){
+    public void showWest(Boolean show, String text) {
         westText.setText(text);
         westText.setVisible(show);
         westDoor.setVisible(show);
