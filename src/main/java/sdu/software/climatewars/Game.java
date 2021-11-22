@@ -29,72 +29,73 @@ public class Game extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Climate Wars");
         stage.setResizable(false);
-
-        // How to access labels etc in controllers from start method
         GameController rc = fxmlLoader.getController();
+
+        // Default room setup
+        rc.setupRoom(this.currentRoom);
+
+        // Pass group into controller, to post data in stats box
+        rc.showStats(true, group);
+
+        // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
+        // Der skal være en text input på skærmen, for at kunne detecte key presses
+        //rc.hidePetersBox();
 
         stage.setScene(scene);
         stage.show();
-        rc.setStatsText("Stats");
-        rc.setOptionOneButton("Knap 1");
-        rc.setOptionTwoButton("Knap 2");
-        rc.setScenarioDescription("Scenario description");
-        rc.setScenarioText("Scenario");
-        rc.setBackgroundImage("Beach");
-        rc.hideStats();
     }
 
     private void createRooms() {
-        Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornField;
+        Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornfield;
 
-        city = new Room("in an abandoned city");
-        forest = new Room("in a dark forest", getRandomChallenge());
-        cliffs = new Room("at the cliffs", getRandomChallenge());
-        hilltops = new Room("at the hilltops by the cliffs", getRandomChallenge());
-        university = new Room("in the university", getRandomChallenge());
-        club = new Room("in a nightclub", getRandomChallenge());
-        beach = new Room("at the beach", getRandomChallenge());
-        lake = new Room("at the lake", getRandomChallenge());
-        fields = new Room("at the fields", getRandomChallenge());
-        cornField = new Room("in the cornfield", getRandomChallenge());
+        city = new Room("City", "in an abandoned city", "City");
+        forest = new Room("Forest", "in a dark forest", getRandomChallenge(), "Forrest");
+        cliffs = new Room("Cliffs", "at the cliffs", getRandomChallenge(), "Cliffs");
+        hilltops = new Room("Hilltops", "at the hilltops by the cliffs", getRandomChallenge(), "Hilltops");
+        university = new Room("University", "in the university", getRandomChallenge(), "University");
+        club = new Room("Club", "in a nightclub", getRandomChallenge(), "Club");
+        beach = new Room("Beach", "at the beach", getRandomChallenge(), "Beach");
+        lake = new Room("Lake", "at the lake", getRandomChallenge(), "Lake");
+        fields = new Room("Fields", "at the fields", getRandomChallenge(), "Field");
+        cornfield = new Room("Cornfield", "in the cornfield", getRandomChallenge(), "Cornfield");
 
         // Abandoned city
-        city.setExit("forest", forest);
-        city.setExit("club", club);
-        city.setExit("university", university);
-        city.setExit("fields", fields);
+        city.setExit("south: forest", forest);
+        city.setExit("east: club", club);
+        city.setExit("north: university", university);
+        city.setExit("west: fields", fields);
 
         // Fields
-        fields.setExit("cornfield", cornField);
-        fields.setExit("city", city);
+        fields.setExit("north: cornfield", cornfield);
+        fields.setExit("east: city", city);
 
         // Cornfield
-        cornField.setExit("fields", fields);
+        cornfield.setExit("south: fields", fields);
 
         // Club
-        club.setExit("city", city);
+        club.setExit("west: city", city);
 
         // Dark forest
-        forest.setExit("city", city);
-        forest.setExit("hilltops", hilltops);
+        forest.setExit("north: city", city);
+        forest.setExit("east: hilltops", hilltops);
 
         // Hilltops
-        hilltops.setExit("cliffs", cliffs);
-        hilltops.setExit("forest", forest);
+        hilltops.setExit("south: cliffs", cliffs);
+        hilltops.setExit("west: forest", forest);
 
         // Cliffs
-        cliffs.setExit("hilltops", hilltops);
+        cliffs.setExit("north: hilltops", hilltops);
 
         // University
-        university.setExit("lake", lake);
-        university.setExit("city", city);
+        university.setExit("north: lake", lake);
+        university.setExit("south: city", city);
 
         // Lake
-        lake.setExit("university", university);
-        lake.setExit("beach", beach);
+        lake.setExit("south: university", university);
+        lake.setExit("east: beach", beach);
 
         // Beach
-        beach.setExit("lake", lake);
+        beach.setExit("west: lake", lake);
 
         currentRoom = city;
     }
@@ -197,7 +198,7 @@ public class Game extends Application {
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
-        } else if (commandWord == CommandWord.GO && currentRoom.getChallenges() == null) {
+        } else if (commandWord == CommandWord.GO && currentRoom.getChallenge() == null) {
             group.eat();
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
@@ -209,12 +210,12 @@ public class Game extends Application {
                 System.out.println("I don't know what you mean...");
                 return false;
             }
-            if (currentRoom.getChallenges() != null) {
-                for (String s : currentRoom.getChallenges().getOptions()) {
+            if (currentRoom.getChallenge() != null) {
+                for (String s : currentRoom.getChallenge().getOptions()) {
                     if (s.contains(commandWord.getCommandString())) {
-                        currentRoom.getChallenges().applyEffect(commandWord.getCommandString());
+                        currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
                         group.getStats();
-                        currentRoom.setChallenges(null);
+                        currentRoom.setChallenge(null);
                         return wantToQuit;
                     }
                 }
@@ -253,7 +254,7 @@ public class Game extends Application {
             System.out.println("You can't go there!");
         } else {
             System.out.println("------------------ You are here ------------------");
-            currentRoom.setChallenges(getRandomChallenge());
+            currentRoom.setChallenge(getRandomChallenge());
             currentRoom = nextRoom;
 
             // When entering a new place, there's 25% chance of finding a new person
@@ -266,9 +267,9 @@ public class Game extends Application {
             }
 
             System.out.println(currentRoom.getLongDescription());
-            this.currentRoom.getChallenges().applyEffect();
-            if (!currentRoom.getChallenges().getHasOptions()) {
-                this.currentRoom.setChallenges(null);
+            this.currentRoom.getChallenge().applyEffect();
+            if (!currentRoom.getChallenge().getHasOptions()) {
+                this.currentRoom.setChallenge(null);
             }
         }
     }

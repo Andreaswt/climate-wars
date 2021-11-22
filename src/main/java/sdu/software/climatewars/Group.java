@@ -103,4 +103,12 @@ public class Group {
             return 0;
         }
     }
+
+    public int getFood() {
+        return this.food;
+    }
+
+    public int getSatiety() {
+        return this.satiety;
+    }
 }

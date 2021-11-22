@@ -34,12 +34,12 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Button fx:id="optionOneButton" layoutX="9.0" layoutY="118.0" mnemonicParsing="false" onAction="#optionOneAction" prefHeight="33.0" prefWidth="126.0" style="-fx-wrap-text: true;" text="Option 1 her, med en maaaaaasssseee tekst">
+            <Button fx:id="optionOneButton" layoutX="9.0" layoutY="118.0" mnemonicParsing="false" onAction="#optionOneAction" prefHeight="33.0" prefWidth="126.0" style="-fx-wrap-text: true;" text="Option 1">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button fx:id="optionTwoButton" layoutX="139.0" layoutY="118.0" mnemonicParsing="false" onAction="#optionTwoAction" prefHeight="33.0" prefWidth="139.0" style="-fx-wrap-text: true;" text="Option 2 her, med en maaaaaasssseee tekst">
+            <Button fx:id="optionTwoButton" layoutX="139.0" layoutY="118.0" mnemonicParsing="false" onAction="#optionTwoAction" prefHeight="33.0" prefWidth="139.0" style="-fx-wrap-text: true;" text="Option 2">
                <font>
                   <Font size="10.0" />
                </font>
@@ -100,17 +100,17 @@
       </Label>
       <AnchorPane fx:id="textBox1" layoutX="704.0" layoutY="441.0" prefHeight="161.0" prefWidth="299.0" style="-fx-background-color: white; -fx-border-color: black;">
          <children>
-            <Label fx:id="title1" layoutX="9.0" layoutY="-9.0" prefHeight="58.0" prefWidth="280.0" text="SCENARIO:">
+            <Label fx:id="title1" layoutX="9.0" layoutY="-9.0" prefHeight="58.0" prefWidth="280.0" text="INFO:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="description1" alignment="TOP_LEFT" layoutX="10.0" layoutY="31.0" prefHeight="83.0" prefWidth="260.0" style="-fx-wrap-text: true;" text="Your group has encountered another group of survivors numbering XX people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.">
+            <Label fx:id="description1" alignment="TOP_LEFT" layoutX="10.0" layoutY="31.0" prefHeight="83.0" prefWidth="260.0" style="-fx-wrap-text: true;" text="Type help for help">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <Button fx:id="button1" layoutX="219.0" layoutY="104.0" mnemonicParsing="false" onAction="#button1Action" prefHeight="33.0" prefWidth="68.0" style="-fx-wrap-text: true;" text="knap1">
+            <Button fx:id="button1" layoutX="219.0" layoutY="104.0" mnemonicParsing="false" onAction="#button1Action" prefHeight="33.0" prefWidth="68.0" style="-fx-wrap-text: true;" text="Execute">
                <font>
                   <Font size="10.0" />
                </font>

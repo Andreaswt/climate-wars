@@ -13,7 +13,7 @@ public class Challenge {
     private final Group group;
 
     public Challenge(String name, String description, Map<String, String> options, Group group) {
-        this.name = "\033[1m" + name.toUpperCase() + "\033[0m";
+        this.name = name.toUpperCase();
         this.description = description;
         if (this.description.contains("XX")) {
             this.description = this.description.replace("XX", String.valueOf(randomGroupSizeGenerator()));
@@ -24,7 +24,7 @@ public class Challenge {
     }
 
     public Challenge(String name, String description, ArrayList<String> effect, Group group) {
-        this.name = "\033[1m" + name.toUpperCase() + "\033[0m";
+        this.name = name.toUpperCase();
         this.description = description;
         this.effect = effect;
         this.hasOptions = false;
@@ -154,5 +154,13 @@ public class Challenge {
 
     public int getRandomGroupSize() {
         return Integer.parseInt(description.replaceAll("[^0-9]", ""));
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

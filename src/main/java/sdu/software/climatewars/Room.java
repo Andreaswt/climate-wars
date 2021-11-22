@@ -5,20 +5,26 @@ import java.util.Set;
 import java.util.HashMap;
 
 public class Room {
+    private final String name;
     private final String description;
     private final HashMap<String, Room> exits;
     private ArrayList<Item> items;
-    private Challenge challenges;
+    private Challenge challenge;
+    private String backgroundImage;
 
-    public Room(String description) {
+    public Room(String name, String description, String bg) {
+        this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
+        backgroundImage = bg;
     }
 
-    public Room(String description, Challenge challenges) {
+    public Room(String name, String description, Challenge challenge, String bg) {
+        this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
-        this.challenges = challenges;
+        this.challenge = challenge;
+        backgroundImage = bg;
     }
 
     public void setExit(String direction, Room neighbor) {
@@ -26,10 +32,10 @@ public class Room {
     }
 
     public String getLongDescription() {
-        if (this.challenges == null)
+        if (this.challenge == null)
             return "You are " + description + ".\n" + getExitString();
         else
-            return "You are " + description + ".\n" + getExitString() + "\n" + this.challenges;
+            return "You are " + description + ".\n" + getExitString() + "\n" + this.challenge;
     }
 
     private String getExitString() {
@@ -45,11 +51,23 @@ public class Room {
         return exits.get(direction);
     }
 
-    public Challenge getChallenges() {
-        return this.challenges;
+    public HashMap<String, Room> getExits() {
+        return this.exits;
     }
 
-    public void setChallenges(Challenge challenges) {
-        this.challenges = challenges;
+    public Challenge getChallenge() {
+        return this.challenge;
+    }
+
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+
+    public String getBackgroundImage() {
+        return this.backgroundImage;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
