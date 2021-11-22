@@ -1,0 +1,46 @@
+$Parts with dollar sign will be ignored
+
+Title: Heat wave
+The weather sure seems to get hotter, a heat wave is incoming. The heat is unbearable, and your people are having difficulty doing anything in this heat. People risk dying from strokes, risk is increased with intensive activities.
+Effect: 1
+Kill member
+
+
+Title: Torrential rain
+Clouds are gathering fast, and it looks like a storm is incoming. Your group is struck by torrential rain. People are at risk dying from disease, risk is increased if activities are done.
+Effect: 1
+Kill member
+
+Title: Sudden flood
+This whole area is flooded. Your people have to spend much more time traversing the terrain now.
+Effect: 1
+Reduce food gain
+
+Title: Hostile group encounter
+Your group has encountered another group of survivors numbering XX people, you go to greet them, but you can quickly tell they only have hostile intentions, you must choose whether to fight back or flee.
+Options: 2
+fight: Fight
+flee: Flee
+
+Title: Good group encounter
+Your group has encountered another group of survivors numbering XX people, you greet each other. It is nice to interact with new people for once, but food will always be scarce. You must choose whether to attack them or to leave them be.
+Options: 2
+fight: Fight
+flee: Flee
+
+Title: Help seeking group encounter
+Your group has encountered another group of survivors numbering XX people, the people have no food, no hope, and they are starving. They ask to join your group. You must choose whether to flee from the group or merge together.
+Options: 2
+merge: Merge
+flee: Flee
+
+Title: Fox bite
+A wild ravenous fox appears out of nowhere, its mouth is foaming. Without time to react, the fox darts to the nearest member of the group and bites the individual's foot, before then darting out of sight. Before long the group member becomes sick and dies. Unlucky.
+Effect: 1
+Kill member
+
+Title: Fighting
+A fight has occurred between two people in the group. One is killed. You must choose whether to exile the other one.
+Options: 2
+nothing: Kill member
+exile: Kill members

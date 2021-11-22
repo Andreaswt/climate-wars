@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f158802b-d434-4681-a962-6e7da6c5f37e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/sdu/software/climatewars/Room1Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sdu/software/climatewars/Room1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/climate-wars.iml" beforeDir="false" afterPath="$PROJECT_DIR$/climate-wars.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sdu/software/climatewars/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sdu/software/climatewars/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sdu/software/climatewars/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sdu/software/climatewars/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sdu/software/climatewars/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sdu/software/climatewars/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sdu/software/climatewars/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sdu/software/climatewars/GameController.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="210PPssWq90Ph10uz1crui0jRPE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sdu.software.climatewars" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.GUI">
+    <configuration name="GUI" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="sdu.software.climatewars.Game" />
+      <module name="climate-wars" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="sdu.software.climatewars.Main" />
+      <module name="climate-wars" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.GUI" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f158802b-d434-4681-a962-6e7da6c5f37e" name="Changes" comment="" />
+      <created>1637075012903</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637075012903</updated>
+      <workItem from="1637145272740" duration="1191000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

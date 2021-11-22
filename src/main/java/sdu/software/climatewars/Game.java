@@ -39,6 +39,14 @@ public class Game extends Application {
 
         stage.setScene(scene);
         stage.show();
+        rc.setStatsText("Stats");
+        rc.setOptionOneButton("Knap 1");
+        rc.setOptionTwoButton("Knap 2");
+        rc.setScenarioDescription("Scenario description");
+        rc.setScenarioText("Scenario");
+        rc.setBackgroundImage("Beach");
+        rc.hideStats();
+        //rc.setCharacterImageImage();
 
     }
 
