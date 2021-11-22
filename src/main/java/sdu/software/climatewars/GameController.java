@@ -116,15 +116,22 @@ public class GameController {
 
     public void movePlayer(int dx, int dy) {
         player.requestFocus();
+
         player.setX(player.getX() + dx);
         player.setY(player.getY() + dy);
+
+        if(checkDoorCollision())
+            // Load new scene
+            return;
     }
 
     // Collision detection
-    public void checkDoorCollision(){
+    public Boolean checkDoorCollision(){
         if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())){
             System.out.println("YEEEET");
+            return true;
         }
+        return false;
     }
 
     /* ---------------- Methods to be implemented: ---------------- */
