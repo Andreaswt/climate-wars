@@ -120,6 +120,12 @@ public class GameController {
         player.setY(player.getY() + dy);
     }
 
+    // Collision detection
+    public void checkDoorCollision(){
+        if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())){
+            System.out.println("YEEEET");
+        }
+    }
 
     /* ---------------- Methods to be implemented: ---------------- */
     public void setOptionOneButton(String text){this.optionOneButton.setText(text);}

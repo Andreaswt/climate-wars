@@ -13,7 +13,7 @@ public class Parser
         reader = new Scanner(System.in);
     }
 
-    public Command getCommand() 
+    public Command getCommand()
     {
         String inputLine;
         String word1 = null;
