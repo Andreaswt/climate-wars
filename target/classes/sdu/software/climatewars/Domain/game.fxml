@@ -78,7 +78,7 @@
       <Pane fx:id="southDoor" layoutX="498.0" layoutY="575.0" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: white;" />
       <ImageView fx:id="player" fitHeight="124.0" fitWidth="45.0" layoutX="512.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../player_19.png" />
+            <Image url="@/Anton.png" />
          </image>
       </ImageView>
       <Label fx:id="southText" layoutX="512.0" layoutY="577.0" prefHeight="21.0" prefWidth="59.0" text="Go South">
