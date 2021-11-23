@@ -75,9 +75,33 @@ public class GameController {
     @FXML
     private TextArea textInput1;
 
+    // Rain
+    @FXML
+    private ImageView rain;
+
+    // Fox
+    @FXML
+    private ImageView fox;
+
+    // Sun
+    @FXML
+    private ImageView sun;
+
     // Character
     @FXML
     private ImageView player;
+
+    // Group encounter
+    @FXML
+    private ImageView groupEncounter;
+
+    // Flood
+    @FXML
+    private ImageView flood;
+
+    // Fighintg
+    @FXML
+    private ImageView fighting;
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
@@ -305,6 +329,31 @@ public class GameController {
         player.setX(0);
         player.setY(0);
     }
+
+    public void showRain(Boolean show) {
+        rain.setVisible(show);
+    }
+
+    public void showFox(Boolean show) {
+        fox.setVisible(show);
+    }
+
+    public void showSun(Boolean show) {
+        sun.setVisible(show);
+    }
+
+    public void showFighting(Boolean show) {
+        fighting.setVisible(show);
+    }
+
+    public void showFlood(Boolean show) {
+        flood.setVisible(show);
+    }
+
+    public void showGroupEncounter(Boolean show) {
+        groupEncounter.setVisible(show);
+    }
+
 
     public void hidePetersBox() {
         textBox1.setVisible(false);

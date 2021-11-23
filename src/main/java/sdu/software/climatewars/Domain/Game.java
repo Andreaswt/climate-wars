@@ -40,6 +40,23 @@ public class Game extends Application {
         rc.setGroup(this.group);
         rc.setupRoom(this.currentRoom);
 
+        // Hide rain as default
+        rc.showRain(false);
+
+        // Hide fox as default
+        rc.showFox(false);
+
+        // Hide sun as default
+        rc.showSun(false);
+
+        // Hide fighting as default
+        rc.showFighting(false);
+
+        // Hide flood as default
+        rc.showFlood(false);
+
+        // Hide group encounter as default
+        rc.showGroupEncounter(false);
 
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
