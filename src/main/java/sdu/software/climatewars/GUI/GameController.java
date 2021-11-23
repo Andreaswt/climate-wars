@@ -315,8 +315,6 @@ public class GameController {
     }
 
 
-    /** WIERD SHIT HERE!**/
-
     public void setGroup(Group group){
         this.group = group;
     }
@@ -353,6 +351,7 @@ public class GameController {
                     if (s.contains(commandWord.getCommandString())) {
                         currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
                         group.getStats();
+                        showStats(true, group);
                         currentRoom.setChallenge(null);
                         return wantToQuit;
                     }
@@ -404,8 +403,10 @@ public class GameController {
                 this.group.addToGroup(1);
             }
 
+
             System.out.println(currentRoom.getLongDescription());
             this.currentRoom.getChallenge().applyEffect();
+            showStats(true, group);
         }
     }
 
