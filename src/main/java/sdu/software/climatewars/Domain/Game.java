@@ -38,8 +38,19 @@ public class Game extends Application {
         // Default room setup
         rc.setupRoom(this.currentRoom);
 
+        // Hide rain as default
+        rc.showRain(false);
+
+        // Hide fox as default
+        rc.showFox(false);
+
+        // Hide sun as default
+        rc.showSun(false);
+
+
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
+
 
         // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
         // Der skal være en text input på skærmen, for at kunne detecte key presses

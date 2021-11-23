@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sdu.software.climatewars.GUI.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sdu.software.climatewars.GUI.GameController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="1009.0" layoutX="-7.0" pickOnBounds="true">
          <image>
@@ -122,5 +122,20 @@
             </TextArea>
          </children>
       </AnchorPane>
+      <ImageView fx:id="rain" fitHeight="627.0" fitWidth="1009.0" layoutX="-2.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../baggrunde/rain.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fox" fitHeight="71.0" fitWidth="162.0" layoutX="80.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../fox.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="sun" fitHeight="256.0" fitWidth="352.0" layoutX="122.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../sun.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

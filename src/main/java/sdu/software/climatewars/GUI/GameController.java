@@ -67,6 +67,18 @@ public class GameController {
     @FXML
     private TextArea textInput1;
 
+    // Rain
+    @FXML
+    private ImageView rain;
+
+    // Fox
+    @FXML
+    private ImageView fox;
+
+    // Sun
+    @FXML
+    private ImageView sun;
+
     // Character
     @FXML
     private ImageView player;
@@ -282,6 +294,18 @@ public class GameController {
     public void setPlayerDefaultPosition() {
         player.setX(0);
         player.setY(0);
+    }
+
+    public void showRain(Boolean show) {
+        rain.setVisible(show);
+    }
+
+    public void showFox(Boolean show) {
+        fox.setVisible(show);
+    }
+
+    public void showSun(Boolean show) {
+        sun.setVisible(show);
     }
 
     public void hidePetersBox() {
