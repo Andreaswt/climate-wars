@@ -173,10 +173,12 @@ public class GameController {
 
     public void loadNewScene(Room room) {
         setBackgroundImage(room.getBackgroundImage());
-        showScenario(false, room);
 
+        if(room.getChallenge() == null){
+            showScenario(false, room);
+        }
         // First room "City", won't have a challenge
-        if (room.getName() != "City") {
+        else {
             showScenario(true, room);
         }
     }
