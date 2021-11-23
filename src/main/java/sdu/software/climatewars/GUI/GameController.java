@@ -2,6 +2,7 @@ package sdu.software.climatewars.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import sdu.software.climatewars.Domain.Challenge;
 import sdu.software.climatewars.Domain.Group;
 import sdu.software.climatewars.Domain.Room;
 import javafx.scene.control.Button;
@@ -13,12 +14,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import sdu.software.climatewars.Domain.Room;
+import sdu.software.climatewars.Text.Command;
+import sdu.software.climatewars.Text.CommandWord;
+import sdu.software.climatewars.Text.CommandWords;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 public class GameController {
+    ArrayList<Challenge> challenges;
     Room currentRoom;
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
@@ -97,11 +105,15 @@ public class GameController {
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
+        CommandWord commandWord = CommandWord.valueOf( currentRoom.getChallenge().getOptions().get(0).toUpperCase(Locale.ROOT));
+        processCommand(new Command(commandWord, ""));
         System.out.println("Option 1 chosen");
     }
 
     @FXML
     protected void optionTwoAction(ActionEvent actionEvent) {
+        CommandWord commandWord = CommandWord.valueOf( currentRoom.getChallenge().getOptions().get(1).toUpperCase(Locale.ROOT));
+        processCommand(new Command(commandWord, ""));
         System.out.println("Option 2 chosen");
     }
 
@@ -169,40 +181,50 @@ public class GameController {
     }
 
     public void movePlayer(int dx, int dy) {
-        player.requestFocus();
+        if(currentRoom.getChallenge() == null || !currentRoom.getChallenge().getHasOptions()){
+            player.requestFocus();
 
-        player.setX(player.getX() + dx);
-        player.setY(player.getY() + dy);
+            player.setX(player.getX() + dx);
+            player.setY(player.getY() + dy);
 
-        // Check if player walked into door, and change scene hereafter
-        checkDoorCollision();
+            // Check if player walked into door, and change scene hereafter
+            checkDoorCollision();
+        }
+
     }
 
     // Collision detection
     public void checkDoorCollision() {
         if (player.getBoundsInParent().intersects(northDoor.getBoundsInParent())) {
+            processCommand(new Command( CommandWord.GO, northRoom.getName()));
             setupRoom(northRoom);
             setPlayerDefaultPosition();
+
         } else if (player.getBoundsInParent().intersects(southDoor.getBoundsInParent())) {
+            processCommand(new Command( CommandWord.GO, southRoom.getName()));
             setupRoom(southRoom);
             setPlayerDefaultPosition();
+
         } else if (player.getBoundsInParent().intersects(eastDoor.getBoundsInParent())) {
+            processCommand(new Command( CommandWord.GO, eastRoom.getName()));
             setupRoom(eastRoom);
             setPlayerDefaultPosition();
+
         } else if (player.getBoundsInParent().intersects(westDoor.getBoundsInParent())) {
+            processCommand(new Command( CommandWord.GO, westRoom.getName()));
             setupRoom(westRoom);
             setPlayerDefaultPosition();
+
         }
     }
 
     public void loadNewScene(Room room) {
+
         setBackgroundImage(room.getBackgroundImage());
-        showScenario(false, room);
 
         // First room "City", won't have a challenge
-        if (room.getName() != "City") {
-            showScenario(true, room);
-        }
+        showScenario(room.getChallenge() != null, room);
+
     }
 
     public void setBackgroundImage(String backgroundName) {
@@ -339,5 +361,116 @@ public class GameController {
         description1.setVisible(false);
         button1.setVisible(false);
         textInput1.setVisible(false);
+    }
+
+
+    public void setGroup(Group group){
+        this.group = group;
+    }
+
+    public void setChallenges(ArrayList<Challenge> c){
+        this.challenges = c;
+    }
+
+    private boolean processCommand(Command command) {
+        if (currentRoom.getChallenge() != null && !currentRoom.getChallenge().getHasOptions()) {
+            this.currentRoom.setChallenge(null);
+        }
+
+        boolean wantToQuit = false;
+
+        CommandWord commandWord = command.getCommandWord();
+
+        if (commandWord == CommandWord.HELP) {
+            printHelp();
+        } else if (commandWord == CommandWord.GO && currentRoom.getChallenge() == null) {
+            group.eat();
+            goRoom(command);
+        } else if (commandWord == CommandWord.QUIT) {
+            wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.STATS) {
+            group.getStats();
+        } else {
+            if (commandWord == CommandWord.UNKNOWN) {
+                System.out.println("I don't know what you mean...");
+                return false;
+            }
+            if (currentRoom.getChallenge() != null) {
+                for (String s : currentRoom.getChallenge().getOptions()) {
+                    if (s.contains(commandWord.getCommandString())) {
+                        currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
+                        group.getStats();
+                        showStats(true, group);
+                        currentRoom.setChallenge(null);
+                        return wantToQuit;
+                    }
+                }
+            }
+            System.out.println("Trying to cheat are we? Not on my watch");
+            return false;
+        }
+        return wantToQuit;
+    }
+
+    private void printHelp() {
+        System.out.println();
+        System.out.println("\"\033[3mThe climate have changed...");
+        System.out.println("For the worse");
+        System.out.println("Lead your group to survival.\"\033[0m");
+        System.out.println();
+        System.out.println("Move through the world by typing in command words");
+        System.out.println("You can use the following commands:");
+        System.out.println("-------------------------------------------------");
+        System.out.println("[go] + [go option] -> e.g 'go forest' \n[help] \n[quit] \n[stats]");
+        System.out.println("-------------------------------------------------");
+        System.out.println();
+    }
+
+    private void goRoom(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Go where?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        Room nextRoom = currentRoom.getExitName(direction);
+
+        if (nextRoom == null) {
+            System.out.println("You can't go there!");
+        } else {
+            System.out.println("------------------ You are here ------------------");
+            currentRoom.setChallenge(getRandomChallenge());
+            currentRoom = nextRoom;
+
+            // When entering a new place, there's 25% chance of finding a new person
+            Random rand = new Random();
+            double rollForNewMember = rand.nextInt(100);
+
+            if (rollForNewMember <= 25) {
+                System.out.println("You found a lone member straying around, and invited him to join the group.");
+                this.group.addToGroup(1);
+            }
+
+
+            System.out.println(currentRoom.getLongDescription());
+            this.currentRoom.getChallenge().applyEffect();
+            showStats(true, group);
+        }
+    }
+
+    private boolean quit(Command command) {
+        if (command.hasSecondWord()) {
+            System.out.println("Quit what?");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private Challenge getRandomChallenge() {
+        Random rand = new Random();
+        int index = rand.nextInt(this.challenges.size());
+        return this.challenges.get(index);
     }
 }

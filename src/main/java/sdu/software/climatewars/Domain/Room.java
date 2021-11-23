@@ -51,6 +51,19 @@ public class Room {
         return exits.get(direction);
     }
 
+    public Room getExitName(String direction) {
+        if(exits.containsKey("north: " + direction)){
+            return exits.get("north: " + direction);
+        } else if(exits.containsKey("south: " + direction)){
+            return exits.get("south: " + direction);
+        } else if(exits.containsKey("west: " + direction)){
+            return exits.get("west: " + direction);
+        } else if(exits.containsKey("east: " + direction)){
+            return exits.get("east: " + direction);
+        } else
+        return exits.get(direction);
+    }
+
     public HashMap<String, Room> getExits() {
         return this.exits;
     }

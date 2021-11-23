@@ -36,6 +36,8 @@ public class Game extends Application {
         GameController rc = fxmlLoader.getController();
 
         // Default room setup
+        rc.setChallenges(this.challenges);
+        rc.setGroup(this.group);
         rc.setupRoom(this.currentRoom);
 
         // Hide rain as default
@@ -82,42 +84,42 @@ public class Game extends Application {
         cornfield = new Room("Cornfield", "in the cornfield", getRandomChallenge(), "Cornfield");
 
         // Abandoned city
-        city.setExit("south: forest", forest);
-        city.setExit("east: club", club);
-        city.setExit("north: university", university);
-        city.setExit("west: fields", fields);
+        city.setExit("south: Forest", forest);
+        city.setExit("east: Club", club);
+        city.setExit("north: University", university);
+        city.setExit("west: Fields", fields);
 
         // Fields
-        fields.setExit("north: cornfield", cornfield);
-        fields.setExit("east: city", city);
+        fields.setExit("north: Cornfield", cornfield);
+        fields.setExit("east: City", city);
 
         // Cornfield
-        cornfield.setExit("south: fields", fields);
+        cornfield.setExit("south: Fields", fields);
 
         // Club
-        club.setExit("west: city", city);
+        club.setExit("west: City", city);
 
         // Dark forest
-        forest.setExit("north: city", city);
-        forest.setExit("east: hilltops", hilltops);
+        forest.setExit("north: City", city);
+        forest.setExit("east: Hilltops", hilltops);
 
         // Hilltops
-        hilltops.setExit("south: cliffs", cliffs);
-        hilltops.setExit("west: forest", forest);
+        hilltops.setExit("south: Cliffs", cliffs);
+        hilltops.setExit("west: Forest", forest);
 
         // Cliffs
-        cliffs.setExit("north: hilltops", hilltops);
+        cliffs.setExit("north: Hilltops", hilltops);
 
         // University
-        university.setExit("north: lake", lake);
-        university.setExit("south: city", city);
+        university.setExit("north: Lake", lake);
+        university.setExit("south: City", city);
 
         // Lake
-        lake.setExit("south: university", university);
-        lake.setExit("east: beach", beach);
+        lake.setExit("south: University", university);
+        lake.setExit("east: Beach", beach);
 
         // Beach
-        beach.setExit("west: lake", lake);
+        beach.setExit("west: Lake", lake);
 
         currentRoom = city;
     }
@@ -137,7 +139,7 @@ public class Game extends Application {
             } else {
 
                 Command command = parser.getCommand();
-                finished = processCommand(command);
+
             }
         }
         System.out.println("Thank you for playing. Good bye.");
@@ -213,95 +215,6 @@ public class Game extends Application {
         return aString;
     }
 
-    private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
 
-        CommandWord commandWord = command.getCommandWord();
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        } else if (commandWord == CommandWord.GO && currentRoom.getChallenge() == null) {
-            group.eat();
-            goRoom(command);
-        } else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.STATS) {
-            group.getStats();
-        } else {
-            if (commandWord == CommandWord.UNKNOWN) {
-                System.out.println("I don't know what you mean...");
-                return false;
-            }
-            if (currentRoom.getChallenge() != null) {
-                for (String s : currentRoom.getChallenge().getOptions()) {
-                    if (s.contains(commandWord.getCommandString())) {
-                        currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
-                        group.getStats();
-                        currentRoom.setChallenge(null);
-                        return wantToQuit;
-                    }
-                }
-            }
-            System.out.println("Trying to cheat are we? Not on my watch");
-            return false;
-        }
-        return wantToQuit;
-    }
-
-    private void printHelp() {
-        System.out.println();
-        System.out.println("\"\033[3mThe climate have changed...");
-        System.out.println("For the worse");
-        System.out.println("Lead your group to survival.\"\033[0m");
-        System.out.println();
-        System.out.println("Move through the world by typing in command words");
-        System.out.println("You can use the following commands:");
-        System.out.println("-------------------------------------------------");
-        System.out.println("[go] + [go option] -> e.g 'go forest' \n[help] \n[quit] \n[stats]");
-        System.out.println("-------------------------------------------------");
-        System.out.println();
-    }
-
-    private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("You can't go there!");
-        } else {
-            System.out.println("------------------ You are here ------------------");
-            currentRoom.setChallenge(getRandomChallenge());
-            currentRoom = nextRoom;
-
-            // When entering a new place, there's 25% chance of finding a new person
-            Random rand = new Random();
-            double rollForNewMember = rand.nextInt(100);
-
-            if (rollForNewMember <= 25) {
-                System.out.println("You found a lone member straying around, and invited him to join the group.");
-                this.group.addToGroup(1);
-            }
-
-            System.out.println(currentRoom.getLongDescription());
-            this.currentRoom.getChallenge().applyEffect();
-            if (!currentRoom.getChallenge().getHasOptions()) {
-                this.currentRoom.setChallenge(null);
-            }
-        }
-    }
-
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
-    }
 }
