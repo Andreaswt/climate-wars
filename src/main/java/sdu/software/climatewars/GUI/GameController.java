@@ -83,6 +83,18 @@ public class GameController {
     @FXML
     private ImageView player;
 
+    // Group encounter
+    @FXML
+    private ImageView groupEncounter;
+
+    // Flood
+    @FXML
+    private ImageView flood;
+
+    // Fighintg
+    @FXML
+    private ImageView fighting;
+
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
         System.out.println("Option 1 chosen");
@@ -307,6 +319,19 @@ public class GameController {
     public void showSun(Boolean show) {
         sun.setVisible(show);
     }
+
+    public void showFighting(Boolean show) {
+        fighting.setVisible(show);
+    }
+
+    public void showFlood(Boolean show) {
+        flood.setVisible(show);
+    }
+
+    public void showGroupEncounter(Boolean show) {
+        groupEncounter.setVisible(show);
+    }
+
 
     public void hidePetersBox() {
         textBox1.setVisible(false);
