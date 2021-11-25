@@ -1,5 +1,6 @@
 package sdu.software.climatewars.GUI;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import sdu.software.climatewars.Domain.Challenge;
@@ -360,7 +361,6 @@ public class GameController {
         textInput1.setVisible(false);
     }
 
-
     public void setGroup(Group group){
         this.group = group;
     }
@@ -466,6 +466,12 @@ public class GameController {
         }
     }
 
+   private void tryQuit(){
+        if(group.getGroupSize() <= 0){
+            Platform.exit();
+        }
+   }
+
     private Challenge getRandomChallenge() {
         Random rand = new Random();
         int index = rand.nextInt(this.challenges.size());
@@ -497,6 +503,7 @@ public class GameController {
                 break;
 
         }
+        tryQuit();
     }
 
     private void applyEffect(CommandWord commandWord){
@@ -512,8 +519,10 @@ public class GameController {
             case MERGE:
                 showGroupEncounter(false);
                 break;
-
+            default:
+                break;
         }
+        tryQuit();
     }
 
     private void unApplyEffets(){
