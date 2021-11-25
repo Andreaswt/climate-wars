@@ -1,6 +1,7 @@
 package sdu.software.climatewars.Domain;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Set;
 import java.util.HashMap;
 
@@ -82,5 +83,9 @@ public class Room {
 
     public String getName() {
         return this.name;
+    }
+
+    public String upperCaseOption(int index){
+       return challenge.getOptions().get(index).toUpperCase(Locale.ROOT);
     }
 }
