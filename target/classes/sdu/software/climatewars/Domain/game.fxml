@@ -76,7 +76,7 @@
          </font>
       </Label>
       <Pane fx:id="southDoor" layoutX="498.0" layoutY="575.0" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: white;" />
-      <ImageView fx:id="player" fitHeight="186.0" fitWidth="322" layoutX="512.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player" fitHeight="186.0" fitWidth="322" layoutX="375.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Anton/Anton6.png" />
          </image>
