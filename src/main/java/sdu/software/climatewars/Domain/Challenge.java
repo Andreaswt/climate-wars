@@ -108,7 +108,8 @@ public class Challenge {
 
     public void killMembers() {
         this.group.killMember(100);
-        this.group.killMember(100);
+        if(this.group.getGroupSize()>0)
+            this.group.killMember(100);
     }
 
     public void removeFoodAndPeople() {

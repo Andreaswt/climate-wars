@@ -75,9 +75,10 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <ImageView fx:id="player" fitHeight="124.0" fitWidth="45.0" layoutX="512.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+      <Pane fx:id="southDoor" layoutX="498.0" layoutY="575.0" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: white;" />
+      <ImageView fx:id="player" fitHeight="186.0" fitWidth="322" layoutX="375.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Anton.png" />
+            <Image url="@../../../../Anton/Anton6.png" />
          </image>
       </ImageView>
       <Pane fx:id="eastDoor" layoutX="951.0" layoutY="288.0" prefHeight="26.0" prefWidth="76.0" rotate="90.0" style="-fx-background-color: white;" />
