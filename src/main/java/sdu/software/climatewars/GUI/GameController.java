@@ -504,6 +504,7 @@ public class GameController {
 
         }
         tryQuit();
+        updateGroupPic();
     }
 
     private void applyEffect(CommandWord commandWord){
@@ -523,6 +524,7 @@ public class GameController {
                 break;
         }
         tryQuit();
+        updateGroupPic();
     }
 
     private void unApplyEffets(){
@@ -532,5 +534,16 @@ public class GameController {
         showGroupEncounter(false);
         showRain(false);
         showSun(false);
+    }
+
+    private void updateGroupPic(){
+        try {
+            String backgroundPath = "src/main/resources/Anton/Anton" + this.group.getGroupSize() + ".png";
+            FileInputStream inputStream = new FileInputStream(backgroundPath);
+            Image background = new Image(inputStream);
+            this.player.setImage(background);
+        } catch (FileNotFoundException e) {
+            System.out.println("Anton not found");
+        }
     }
 }

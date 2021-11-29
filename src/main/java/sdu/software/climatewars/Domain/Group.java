@@ -18,8 +18,10 @@ public class Group {
     public void addToGroup(int toAdd) {
         // Add 6 persons
         for (int i = 0; i < toAdd; i++) {
-            Person member = new Person("Person" + i);
-            this.members.add(member);
+            if(this.members.size()<10) {
+                Person member = new Person("Person" + i);
+                this.members.add(member);
+            }
         }
 
         // Add 10 food units
