@@ -211,19 +211,20 @@
             </Label>
          </top>
          <center>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="startButton" mnemonicParsing="false" onAction="#startAction" text="Play">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="optionsButton" mnemonicParsing="false" onAction="#openOptions" text="Options">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </Button>
                   <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
+                  <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartGame" text="Restart game" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" top="25.0" />

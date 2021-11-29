@@ -30,6 +30,7 @@ public class GameController {
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
 
+    // Menu features
     @FXML
     private BorderPane menu;
 
@@ -205,7 +206,6 @@ public class GameController {
                 showWest(true, key.replace("west: ", ""));
             }
         }
-
         loadNewScene(currentRoom);
     }
 
@@ -219,7 +219,6 @@ public class GameController {
             // Check if player walked into door, and change scene hereafter
             checkDoorCollision();
         }
-
     }
 
     // Collision detection
@@ -248,12 +247,10 @@ public class GameController {
     }
 
     public void loadNewScene(Room room) {
-
         setBackgroundImage(room.getBackgroundImage());
 
         // First room "City", won't have a challenge
         showScenario(room.getChallenge() != null, room);
-
     }
 
     public void setBackgroundImage(String backgroundName) {
@@ -382,7 +379,6 @@ public class GameController {
     public void showGroupEncounter(Boolean show) {
         groupEncounter.setVisible(show);
     }
-
 
     public void hidePetersBox() {
         textBox1.setVisible(false);

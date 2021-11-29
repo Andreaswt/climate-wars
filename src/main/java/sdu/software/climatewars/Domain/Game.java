@@ -29,13 +29,6 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        /*FXMLLoader menu = new FXMLLoader(Game.class.getResource("menu.fxml"));
-        Scene menuScene = new Scene(menu.load());
-        stage.setTitle("Climate Wars");
-        stage.setResizable(false);*/
-
-
         FXMLLoader game = new FXMLLoader(Game.class.getResource("game.fxml"));
         Scene scene = new Scene(game.load());
         stage.setTitle("Climate Wars");
@@ -75,8 +68,6 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-
 
     private void createRooms() {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornfield;
@@ -190,7 +181,6 @@ public class Game extends Application {
                             }
                             this.challenges.add(new Challenge(cName, cDescription, cOptions, this.group));
                         }
-
                     }
                 }
             }
@@ -223,7 +213,4 @@ public class Game extends Application {
         aString += currentRoom.getLongDescription();
         return aString;
     }
-
-
-
 }
