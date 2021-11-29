@@ -1,5 +1,6 @@
 package sdu.software.climatewars.GUI;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import sdu.software.climatewars.Domain.Challenge;
@@ -105,16 +106,14 @@ public class GameController {
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
-        CommandWord commandWord = CommandWord.valueOf( currentRoom.getChallenge().getOptions().get(0).toUpperCase(Locale.ROOT));
+        CommandWord commandWord = CommandWord.valueOf( currentRoom.upperCaseOption(0));
         processCommand(new Command(commandWord, ""));
-        System.out.println("Option 1 chosen");
     }
 
     @FXML
     protected void optionTwoAction(ActionEvent actionEvent) {
-        CommandWord commandWord = CommandWord.valueOf( currentRoom.getChallenge().getOptions().get(1).toUpperCase(Locale.ROOT));
+        CommandWord commandWord = CommandWord.valueOf( currentRoom.upperCaseOption(1));
         processCommand(new Command(commandWord, ""));
-        System.out.println("Option 2 chosen");
     }
 
     @FXML
@@ -354,7 +353,6 @@ public class GameController {
         groupEncounter.setVisible(show);
     }
 
-
     public void hidePetersBox() {
         textBox1.setVisible(false);
         title1.setVisible(false);
@@ -362,7 +360,6 @@ public class GameController {
         button1.setVisible(false);
         textInput1.setVisible(false);
     }
-
 
     public void setGroup(Group group){
         this.group = group;
@@ -398,7 +395,7 @@ public class GameController {
             if (currentRoom.getChallenge() != null) {
                 for (String s : currentRoom.getChallenge().getOptions()) {
                     if (s.contains(commandWord.getCommandString())) {
-                        currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
+                        applyEffect(commandWord);
                         group.getStats();
                         showStats(true, group);
                         currentRoom.setChallenge(null);
@@ -441,6 +438,7 @@ public class GameController {
         } else {
             System.out.println("------------------ You are here ------------------");
             currentRoom.setChallenge(getRandomChallenge());
+            unApplyEffets();
             currentRoom = nextRoom;
 
             // When entering a new place, there's 25% chance of finding a new person
@@ -454,7 +452,7 @@ public class GameController {
 
 
             System.out.println(currentRoom.getLongDescription());
-            this.currentRoom.getChallenge().applyEffect();
+            applyEffect();
             showStats(true, group);
         }
     }
@@ -468,9 +466,71 @@ public class GameController {
         }
     }
 
+   private void tryQuit(){
+        if(group.getGroupSize() <= 0){
+            Platform.exit();
+        }
+   }
+
     private Challenge getRandomChallenge() {
         Random rand = new Random();
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
+    }
+
+    private void applyEffect(){
+        this.currentRoom.getChallenge().applyEffect();
+        switch (this.currentRoom.getChallenge().getName()){
+            case "HEAT WAVE":
+                showSun(true);
+                break;
+            case "TORRENTIAL RAIN":
+                showRain(true);
+                break;
+            case "SUDDEN FLOOD":
+                showFlood(true);
+                break;
+            case "HOSTILE GROUP ENCOUNTER":
+            case "HELP SEEKING GROUP ENCOUNTER":
+            case "GOOD GROUP ENCOUNTER":
+                showGroupEncounter(true);
+                break;
+            case "FOX BITE":
+                showFox(true);
+                break;
+            case "FIGHTING":
+                showFighting(true);
+                break;
+
+        }
+        tryQuit();
+    }
+
+    private void applyEffect(CommandWord commandWord){
+        currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
+        switch (commandWord){
+            case NOTHING:
+            case EXILE:
+                showFighting(false);
+                break;
+            case FIGHT:
+                showFighting(true);
+            case FLEE:
+            case MERGE:
+                showGroupEncounter(false);
+                break;
+            default:
+                break;
+        }
+        tryQuit();
+    }
+
+    private void unApplyEffets(){
+        showFighting(false);
+        showFox(false);
+        showFlood(false);
+        showGroupEncounter(false);
+        showRain(false);
+        showSun(false);
     }
 }
