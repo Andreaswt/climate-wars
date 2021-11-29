@@ -33,6 +33,9 @@ public class GameController {
     @FXML
     private BorderPane menu;
 
+    @FXML
+    private BorderPane optionsMenu;
+
     // Background image for room
     @FXML
     private ImageView backgroundImage;
@@ -122,6 +125,7 @@ public class GameController {
     @FXML
     protected void startAction(ActionEvent actionEvent) {
         menu.setVisible(false);
+        optionsMenu.setVisible(false);
     }
 
     @FXML
@@ -132,6 +136,13 @@ public class GameController {
     @FXML
     protected void openMenu(ActionEvent esc) {
         menu.setVisible(true);
+        optionsMenu.setVisible(false);
+    }
+
+    @FXML
+    protected void openOptions(ActionEvent options) {
+        menu.setVisible(false);
+        optionsMenu.setVisible(true);
     }
 
     @FXML
