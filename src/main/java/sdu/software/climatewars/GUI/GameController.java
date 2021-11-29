@@ -2,9 +2,8 @@ package sdu.software.climatewars.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import sdu.software.climatewars.Domain.Challenge;
-import sdu.software.climatewars.Domain.Group;
-import sdu.software.climatewars.Domain.Room;
+import javafx.scene.layout.BorderPane;
+import sdu.software.climatewars.Domain.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -30,6 +29,9 @@ public class GameController {
     Room currentRoom;
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
+
+    @FXML
+    private BorderPane menu;
 
     // Background image for room
     @FXML
@@ -104,9 +106,6 @@ public class GameController {
     private ImageView fighting;
 
     @FXML
-    private Button startButton;
-
-    @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
         CommandWord commandWord = CommandWord.valueOf( currentRoom.getChallenge().getOptions().get(0).toUpperCase(Locale.ROOT));
         processCommand(new Command(commandWord, ""));
@@ -121,6 +120,21 @@ public class GameController {
     }
 
     @FXML
+    protected void startAction(ActionEvent actionEvent) {
+        menu.setVisible(false);
+    }
+
+    @FXML
+    protected void quitAction(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    protected void openMenu(ActionEvent esc) {
+        menu.setVisible(true);
+    }
+
+    @FXML
     protected void button1Action(ActionEvent actionEvent) {
         System.out.println("Button 1 activated");
     }
@@ -132,6 +146,7 @@ public class GameController {
             case DOWN -> movePlayer(0, 10);
             case LEFT -> movePlayer(-10, 0);
             case RIGHT -> movePlayer(10, 0);
+            case ESCAPE -> menu.setVisible(true);
         }
     }
 
