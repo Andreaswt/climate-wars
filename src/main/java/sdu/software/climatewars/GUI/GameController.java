@@ -1,7 +1,13 @@
 package sdu.software.climatewars.GUI;
 
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.util.Duration;
+import org.controlsfx.control.action.Action;
 import sdu.software.climatewars.Domain.Group;
 import sdu.software.climatewars.Domain.Room;
 import javafx.scene.control.Button;
@@ -12,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import sdu.software.climatewars.Domain.Room;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -91,9 +96,13 @@ public class GameController {
     @FXML
     private ImageView flood;
 
-    // Fighintg
+    // Fighting
     @FXML
     private ImageView fighting;
+
+    // Exile
+    @FXML
+    private ImageView exile;
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
@@ -310,26 +319,83 @@ public class GameController {
 
     public void showRain(Boolean show) {
         rain.setVisible(show);
+        TranslateTransition translateTransitionRain = new TranslateTransition();
+        translateTransitionRain.setNode(rain);
+        translateTransitionRain.setByY(100);
+        translateTransitionRain.setDuration(Duration.millis(1000));
+        translateTransitionRain.setCycleCount(Animation.INDEFINITE);
+        translateTransitionRain.play();
     }
 
     public void showFox(Boolean show) {
         fox.setVisible(show);
+        TranslateTransition translateTransitionFox = new TranslateTransition();
+        translateTransitionFox.setNode(fox);
+        translateTransitionFox.setByX(350);
+        translateTransitionFox.setByY(150);
+        translateTransitionFox.setDuration(Duration.millis(2000));
+        translateTransitionFox.isAutoReverse();
+        translateTransitionFox.play();
     }
 
     public void showSun(Boolean show) {
         sun.setVisible(show);
+        TranslateTransition translateTransitionSun = new TranslateTransition();
+        translateTransitionSun.setNode(sun);
+
+        RotateTransition rotateTransitionSun =  new RotateTransition();
+        rotateTransitionSun.setNode(sun);
+        rotateTransitionSun.setByAngle(36000);
+        rotateTransitionSun.setDuration(Duration.millis(108001));
+        rotateTransitionSun.setAutoReverse(true);
+        rotateTransitionSun.play();
     }
 
     public void showFighting(Boolean show) {
         fighting.setVisible(show);
+        TranslateTransition translateTransitionFighting = new TranslateTransition();
+        translateTransitionFighting.setNode(fighting);
+        translateTransitionFighting.setByY(3);
+        translateTransitionFighting.setByX(3);
+        translateTransitionFighting.setDuration(Duration.millis(250));
+        translateTransitionFighting.setCycleCount(Animation.INDEFINITE);
+        translateTransitionFighting.play();
+
+        RotateTransition rotateTransitionFighting = new RotateTransition();
+        rotateTransitionFighting.setNode(fighting);
+        rotateTransitionFighting.setFromAngle(-5);
+        rotateTransitionFighting.setToAngle(5);
+        rotateTransitionFighting.setDuration(Duration.millis(200));
+        rotateTransitionFighting.setCycleCount(Animation.INDEFINITE);
+        rotateTransitionFighting.play();
     }
 
     public void showFlood(Boolean show) {
         flood.setVisible(show);
+        TranslateTransition translateTransitionFlood =  new TranslateTransition();
+        translateTransitionFlood.setNode(flood);
+        translateTransitionFlood.setByX(10);
+        translateTransitionFlood.setDuration(Duration.millis(2500));
+        translateTransitionFlood.setCycleCount(Animation.INDEFINITE);
+        translateTransitionFlood.play();
     }
 
     public void showGroupEncounter(Boolean show) {
         groupEncounter.setVisible(show);
+        TranslateTransition translateTransitionGroup = new TranslateTransition();
+        translateTransitionGroup.setNode(groupEncounter);
+        translateTransitionGroup.setByX(-420);
+        translateTransitionGroup.setDuration(Duration.seconds(4));
+        translateTransitionGroup.play();
+    }
+
+    public void showExile(Boolean show){
+    exile.setVisible(show);
+    TranslateTransition translateTransitionExile = new TranslateTransition();
+    translateTransitionExile.setNode(exile);
+    translateTransitionExile.setByX(500);
+    translateTransitionExile.setDuration(Duration.seconds(4));
+    translateTransitionExile.play();
     }
 
 
