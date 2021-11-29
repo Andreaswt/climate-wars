@@ -99,9 +99,12 @@ public class GameController {
     @FXML
     private ImageView flood;
 
-    // Fighintg
+    // Fighting
     @FXML
     private ImageView fighting;
+
+    @FXML
+    private Button startButton;
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {

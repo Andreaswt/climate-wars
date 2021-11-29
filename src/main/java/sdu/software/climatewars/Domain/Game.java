@@ -29,11 +29,18 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+
+        /*FXMLLoader menu = new FXMLLoader(Game.class.getResource("menu.fxml"));
+        Scene menuScene = new Scene(menu.load());
+        stage.setTitle("Climate Wars");
+        stage.setResizable(false);*/
+
+
+        FXMLLoader game = new FXMLLoader(Game.class.getResource("game.fxml"));
+        Scene scene = new Scene(game.load());
         stage.setTitle("Climate Wars");
         stage.setResizable(false);
-        GameController rc = fxmlLoader.getController();
+        GameController rc = game.getController();
 
         // Default room setup
         rc.setChallenges(this.challenges);
@@ -68,6 +75,8 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     private void createRooms() {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornfield;
