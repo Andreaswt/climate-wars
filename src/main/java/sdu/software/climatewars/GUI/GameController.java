@@ -340,34 +340,39 @@ public class GameController {
     }
 
     public void showRain(Boolean show) {
-        TranslateTransition translateTransitionRain = new TranslateTransition();
-        translateTransitionRain.setNode(rain);
-        rain.setVisible(show);
-        translateTransitionRain.setByY(100);
-        translateTransitionRain.setDuration(Duration.millis(1000));
-        translateTransitionRain.setCycleCount(Animation.INDEFINITE);
-        translateTransitionRain.play();
+        if(show) {
+            TranslateTransition translateTransitionRain = new TranslateTransition();
+            translateTransitionRain.setNode(rain);
+            rain.setVisible(show);
+            translateTransitionRain.setByY(100);
+            translateTransitionRain.setDuration(Duration.millis(1000));
+            translateTransitionRain.setCycleCount(Animation.INDEFINITE);
+            translateTransitionRain.play();
+        } else {
+            rain.setVisible(show);
+            rain.setTranslateX(0.0);
+            rain.setTranslateY(0.0);
+        }
     }
 
     public void showFox(Boolean show) {
-        fox.requestFocus();
-        fox.setX(player.getX());
-        fox.setY(player.getY());
-        TranslateTransition translateTransitionFox = new TranslateTransition();
-        translateTransitionFox.setNode(fox);
-        fox.setVisible(show);
-        translateTransitionFox.setByX(350);
-        translateTransitionFox.setByY(150);
-        translateTransitionFox.setDuration(Duration.millis(2000));
-        translateTransitionFox.isAutoReverse();
-        translateTransitionFox.play();
+        if(show) {
+            TranslateTransition translateTransitionFox = new TranslateTransition();
+            translateTransitionFox.setNode(fox);
+            fox.setVisible(show);
+            translateTransitionFox.setByX(350);
+            translateTransitionFox.setByY(150);
+            translateTransitionFox.setDuration(Duration.millis(2000));
+            translateTransitionFox.isAutoReverse();
+            translateTransitionFox.play();
+        } else {
+            fox.setVisible(show);
+            fox.setTranslateX(0.0);
+            fox.setTranslateY(0.0);
+        }
     }
 
     public void showSun(Boolean show) {
-        sun.requestFocus();
-        sun.setX(player.getX());
-        sun.setY(player.getY());
-
         sun.setVisible(show);
         TranslateTransition translateTransitionSun = new TranslateTransition();
         translateTransitionSun.setNode(sun);
@@ -414,40 +419,33 @@ public class GameController {
     }
 
     public void showGroupEncounter(Boolean show) {
-        groupEncounter.setVisible(show);
-        TranslateTransition translateTransitionGroup = new TranslateTransition();
-        translateTransitionGroup.setNode(groupEncounter);
-        translateTransitionGroup.setByX(-420);
-        translateTransitionGroup.setDuration(Duration.seconds(4));
-        translateTransitionGroup.play();
+        if(show) {
+            groupEncounter.setVisible(true);
+            TranslateTransition translateTransitionGroup = new TranslateTransition();
+            translateTransitionGroup.setNode(groupEncounter);
+            translateTransitionGroup.setByX(-420);
+            translateTransitionGroup.setDuration(Duration.seconds(4));
+            translateTransitionGroup.play();
+        } else {
+            groupEncounter.setVisible(false);
+            groupEncounter.setTranslateX(0.0);
+            groupEncounter.setTranslateY(0.0);
+        }
     }
-
-    public void updateAnimations() {
-        /*fox.requestFocus();
-        fox.setX(-500);
-        fox.setY(-300);
-
-        exile.requestFocus();
-        exile.setX(-500);
-        exile.setY(-300);
-
-        groupEncounter.requestFocus();
-        groupEncounter.setX(-500);
-        groupEncounter.setY(-300);
-
-        sun.requestFocus();
-        sun.setX(500);
-        sun.setY(-300); */
-    }
-
 
     public void showExile(Boolean show){
-    exile.setVisible(show);
-    TranslateTransition translateTransitionExile = new TranslateTransition();
-    translateTransitionExile.setNode(exile);
-    translateTransitionExile.setByX(500);
-    translateTransitionExile.setDuration(Duration.seconds(4));
-    translateTransitionExile.play();
+        if(show) {
+            exile.setVisible(true);
+            TranslateTransition translateTransitionExile = new TranslateTransition();
+            translateTransitionExile.setNode(exile);
+            translateTransitionExile.setByX(500);
+            translateTransitionExile.setDuration(Duration.seconds(4));
+            translateTransitionExile.play();
+        } else {
+            exile.setVisible(false);
+            exile.setTranslateX(0.0);
+            exile.setTranslateY(0.0);
+        }
     }
 
     public void hidePetersBox() {
@@ -563,7 +561,7 @@ public class GameController {
         }
     }
 
-   private void tryQuit(){
+    private void tryQuit(){
         if(group.getGroupSize() <= 0){
             Platform.exit();
         }
@@ -608,8 +606,10 @@ public class GameController {
         currentRoom.getChallenge().applyEffect(commandWord.getCommandString());
         switch (commandWord){
             case NOTHING:
+                showFighting(false);
             case EXILE:
                 showFighting(false);
+                showExile(true);
                 break;
             case FIGHT:
                 showFighting(true);
@@ -631,7 +631,7 @@ public class GameController {
         showGroupEncounter(false);
         showRain(false);
         showSun(false);
-        updateAnimations();
+        showExile(false);
     }
 
     private void updateGroupPic(){
