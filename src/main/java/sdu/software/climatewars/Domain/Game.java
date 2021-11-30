@@ -58,6 +58,9 @@ public class Game extends Application {
         // Hide group encounter as default
         rc.showGroupEncounter(false);
 
+        //Hide exile animation as default - skal bindes til når exile vælges :D
+        rc.showExile(false);
+
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
 

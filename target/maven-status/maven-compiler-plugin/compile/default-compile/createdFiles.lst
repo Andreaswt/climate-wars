@@ -1,0 +1,16 @@
+sdu\software\climatewars\Domain\Inventory.class
+sdu\software\climatewars\Text\Parser.class
+sdu\software\climatewars\GUI\GameController$1.class
+sdu\software\climatewars\Domain\Challenge.class
+sdu\software\climatewars\Domain\FoodItem.class
+module-info.class
+sdu\software\climatewars\Domain\Person.class
+sdu\software\climatewars\Text\CommandWord.class
+sdu\software\climatewars\Text\CommandWords.class
+sdu\software\climatewars\Domain\Game.class
+sdu\software\climatewars\Domain\Room.class
+sdu\software\climatewars\Text\Command.class
+sdu\software\climatewars\Domain\Item.class
+sdu\software\climatewars\GUI\GameController.class
+sdu\software\climatewars\Main.class
+sdu\software\climatewars\Domain\Group.class
