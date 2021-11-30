@@ -169,6 +169,7 @@ public class GameController {
             case DOWN -> movePlayer(0, 10);
             case LEFT -> movePlayer(-10, 0);
             case RIGHT -> movePlayer(10, 0);
+            case ESCAPE -> menu.setVisible(true);
         }
     }
 
