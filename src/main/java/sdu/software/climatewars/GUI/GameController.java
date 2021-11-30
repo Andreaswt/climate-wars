@@ -607,6 +607,7 @@ public class GameController {
         switch (commandWord){
             case NOTHING:
                 showFighting(false);
+                break;
             case EXILE:
                 showFighting(false);
                 showExile(true);
