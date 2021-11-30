@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import org.controlsfx.control.action.Action;
 import sdu.software.climatewars.Domain.Challenge;
@@ -37,6 +38,13 @@ public class GameController {
     Room currentRoom;
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
+
+    // Menu features
+    @FXML
+    private BorderPane menu;
+
+    @FXML
+    private BorderPane optionsMenu;
 
     // Background image for room
     @FXML
@@ -113,6 +121,29 @@ public class GameController {
     // Exile
     @FXML
     private ImageView exile;
+
+    @FXML
+    protected void startAction(ActionEvent actionEvent) {
+        menu.setVisible(false);
+        optionsMenu.setVisible(false);
+    }
+
+    @FXML
+    protected void quitAction(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    protected void openMenu(ActionEvent esc) {
+        menu.setVisible(true);
+        optionsMenu.setVisible(false);
+    }
+
+    @FXML
+    protected void openOptions(ActionEvent options) {
+        menu.setVisible(false);
+        optionsMenu.setVisible(true);
+    }
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {

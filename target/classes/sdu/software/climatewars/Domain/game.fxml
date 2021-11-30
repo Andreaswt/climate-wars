@@ -10,6 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sdu.software.climatewars.GUI.GameController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="1009.0" layoutX="-7.0" pickOnBounds="true">
@@ -158,5 +163,79 @@
             <Font size="12.0" />
          </font>
       </Label>
+      <Button fx:id="menuButton" layoutY="574.0" mnemonicParsing="false" onAction="#openMenu" text="Menu" />
+      <BorderPane fx:id="optionsMenu" prefHeight="610.0" prefWidth="1010.0" style="-fx-background-color: BLACK;">
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Options" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="25.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <bottom>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="startButton2" mnemonicParsing="false" onAction="#startAction" text="Play" />
+                  <Button fx:id="returnMenu" mnemonicParsing="false" onAction="#openMenu" text="Return to main menu" />
+                  <Button fx:id="quitButton2" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" text="Volume" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Slider>
+                     <VBox.margin>
+                        <Insets left="125.0" right="125.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <ToggleButton mnemonicParsing="false" text="Mute" />
+               </children>
+               <BorderPane.margin>
+                  <Insets left="300.0" right="300.0" top="50.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="menu" prefHeight="610.0" prefWidth="1010.0" style="-fx-background-color: BLACK;">
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Climate Wars" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="25.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#startAction" text="Play">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="optionsButton" mnemonicParsing="false" onAction="#openOptions" text="Options">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="25.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
