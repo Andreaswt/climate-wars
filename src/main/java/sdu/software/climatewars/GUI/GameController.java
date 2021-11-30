@@ -340,9 +340,9 @@ public class GameController {
     }
 
     public void showRain(Boolean show) {
-        rain.setVisible(show);
         TranslateTransition translateTransitionRain = new TranslateTransition();
         translateTransitionRain.setNode(rain);
+        rain.setVisible(show);
         translateTransitionRain.setByY(100);
         translateTransitionRain.setDuration(Duration.millis(1000));
         translateTransitionRain.setCycleCount(Animation.INDEFINITE);
@@ -350,9 +350,12 @@ public class GameController {
     }
 
     public void showFox(Boolean show) {
-        fox.setVisible(show);
+        fox.requestFocus();
+        fox.setX(player.getX());
+        fox.setY(player.getY());
         TranslateTransition translateTransitionFox = new TranslateTransition();
         translateTransitionFox.setNode(fox);
+        fox.setVisible(show);
         translateTransitionFox.setByX(350);
         translateTransitionFox.setByY(150);
         translateTransitionFox.setDuration(Duration.millis(2000));
@@ -361,6 +364,10 @@ public class GameController {
     }
 
     public void showSun(Boolean show) {
+        sun.requestFocus();
+        sun.setX(player.getX());
+        sun.setY(player.getY());
+
         sun.setVisible(show);
         TranslateTransition translateTransitionSun = new TranslateTransition();
         translateTransitionSun.setNode(sun);
@@ -400,6 +407,10 @@ public class GameController {
         translateTransitionFlood.setDuration(Duration.millis(2500));
         translateTransitionFlood.setCycleCount(Animation.INDEFINITE);
         translateTransitionFlood.play();
+        if (!show){
+            translateTransitionFlood.jumpTo(Duration.ZERO);
+            translateTransitionFlood.stop();
+        }
     }
 
     public void showGroupEncounter(Boolean show) {
@@ -410,6 +421,25 @@ public class GameController {
         translateTransitionGroup.setDuration(Duration.seconds(4));
         translateTransitionGroup.play();
     }
+
+    public void updateAnimations() {
+        /*fox.requestFocus();
+        fox.setX(-500);
+        fox.setY(-300);
+
+        exile.requestFocus();
+        exile.setX(-500);
+        exile.setY(-300);
+
+        groupEncounter.requestFocus();
+        groupEncounter.setX(-500);
+        groupEncounter.setY(-300);
+
+        sun.requestFocus();
+        sun.setX(500);
+        sun.setY(-300); */
+    }
+
 
     public void showExile(Boolean show){
     exile.setVisible(show);
@@ -601,6 +631,7 @@ public class GameController {
         showGroupEncounter(false);
         showRain(false);
         showSun(false);
+        updateAnimations();
     }
 
     private void updateGroupPic(){
