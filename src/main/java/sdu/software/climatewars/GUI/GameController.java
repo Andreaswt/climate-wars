@@ -46,6 +46,10 @@ public class GameController {
     @FXML
     private BorderPane optionsMenu;
 
+    // Game Over scene
+    @FXML
+    private BorderPane gameOver;
+
     // Background image for room
     @FXML
     private ImageView backgroundImage;
@@ -144,6 +148,8 @@ public class GameController {
         menu.setVisible(false);
         optionsMenu.setVisible(true);
     }
+
+    public void showGameOver(Boolean show) { gameOver.setVisible(false); }
 
     @FXML
     protected void optionOneAction(ActionEvent actionEvent) {
@@ -595,7 +601,7 @@ public class GameController {
 
     private void tryQuit(){
         if(group.getGroupSize() <= 0){
-            Platform.exit();
+            gameOver.setVisible(true);
         }
    }
 

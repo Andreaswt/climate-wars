@@ -64,6 +64,8 @@ public class Game extends Application {
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
 
+        rc.showGameOver(false);
+
         // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
         // Der skal være en text input på skærmen, for at kunne detecte key presses
         //rc.hidePetersBox();
