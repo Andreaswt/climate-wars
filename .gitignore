@@ -2,3 +2,4 @@
 /.target/
 /climate-wars.iml
 /pom.xml
+*.iml
