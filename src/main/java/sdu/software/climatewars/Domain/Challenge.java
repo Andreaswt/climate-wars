@@ -97,7 +97,7 @@ public class Challenge {
     }
 
     public void flee() {
-        System.out.println("You fled. Now, continue your journey...");
+
     }
 
     public void killMember() {
@@ -111,7 +111,6 @@ public class Challenge {
     }
 
     public void removeFoodAndPeople() {
-        System.out.println("10 units of food have been removed");
         this.group.removeFood(10);
         this.group.killMember(100);
         this.group.killMember(100);
