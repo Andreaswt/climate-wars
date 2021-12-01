@@ -49,7 +49,6 @@ public class Group {
                 }
                 else{
                     if (starvationMessage == true) {
-                        System.out.println("The group has 0% satiety, group members might die of starvation");
                         starvationMessage = false;
                     }
                     killMember(20);
@@ -73,7 +72,6 @@ public class Group {
 
     public void merge(int membersToAdd) {
         addToGroup(membersToAdd);
-        System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
     public int getMembers(){

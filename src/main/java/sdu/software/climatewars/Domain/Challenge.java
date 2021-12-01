@@ -86,7 +86,6 @@ public class Challenge {
 
         // Fight member by member, until all members have fought.
         // Each member have a 50% chance of dying during fight
-        System.out.println("Your group will fight against " + opponentSize + " opponents, with a 50/50 chance of dying during fight");
         for (int i = 0; i < opponentSize; i++) {
             if(this.group.getMembers() != 0){
                 this.group.killMember(50);
@@ -94,7 +93,6 @@ public class Challenge {
         }
 
         // Gain food for fighting, otherwise there's no reason to fight over fleeing
-        System.out.println("You stole 10 units of food from your opponents while fighting them");
         this.group.addFood(10);
     }
 

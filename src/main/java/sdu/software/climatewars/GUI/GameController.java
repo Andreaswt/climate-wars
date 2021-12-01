@@ -515,7 +515,6 @@ public class GameController {
 
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
             return;
         }
 
@@ -523,24 +522,20 @@ public class GameController {
 
         Room nextRoom = currentRoom.getExitName(direction);
 
-        if (nextRoom == null) {
-            System.out.println("You can't go there!");
-        } else {
-            currentRoom.setChallenge(getRandomChallenge());
-            unApplyEffets();
-            currentRoom = nextRoom;
+        currentRoom.setChallenge(getRandomChallenge());
+        unApplyEffets();
+        currentRoom = nextRoom;
 
-            // When entering a new place, there's 25% chance of finding a new person
-            Random rand = new Random();
-            double rollForNewMember = rand.nextInt(100);
+        // When entering a new place, there's 25% chance of finding a new person
+        Random rand = new Random();
+        double rollForNewMember = rand.nextInt(100);
 
-            if (rollForNewMember <= 25) {
-                this.group.addToGroup(1);
-            }
-
-            applyEffect();
-            showStats(true, group);
+        if (rollForNewMember <= 25) {
+            this.group.addToGroup(1);
         }
+
+        applyEffect();
+        showStats(true, group);
     }
 
     private void tryQuit(){
