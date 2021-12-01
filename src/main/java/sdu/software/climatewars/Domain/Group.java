@@ -4,23 +4,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Group {
-    private final Inventory inventory;
     private int satiety = 100;
     final private int foodSatietyValue = 5;
     private int food;
-    private final ArrayList<Person> members = new ArrayList<>();
+    private int members;
 
     public Group() {
-        this.inventory = new Inventory();
         addToGroup(6);
     }
 
     public void addToGroup(int toAdd) {
         // Add 6 persons
         for (int i = 0; i < toAdd; i++) {
-            if(this.members.size()<10) {
-                Person member = new Person("Person" + i);
-                this.members.add(member);
+            if(this.members<10) {
+                this.members++;
             }
         }
 
@@ -39,7 +36,7 @@ public class Group {
 
     public void eat() {
         boolean starvationMessage = true;
-        for (int i = 0; i < getGroupSize(); i++) {
+        for (int i = 0; i < members; i++) {
             if (this.food > 0){
                 this.food--;
                 if (this.satiety < 100){
@@ -62,7 +59,6 @@ public class Group {
     }
 
     public void killMember(double chanceOfDeath) {
-        int groupSize = getGroupSize();
 
         // Generate random number, to remove random person member from group and a random number to roll for death
         Random rand = new Random();
@@ -72,10 +68,7 @@ public class Group {
             return;
         }
 
-        int index = rand.nextInt(groupSize);
-
-        this.members.remove(index);
-        System.out.println("A member has been killed.");
+        this.members--;
     }
 
     public void merge(int membersToAdd) {
@@ -83,27 +76,8 @@ public class Group {
         System.out.println("Groups have been merged, and your group now have " + membersToAdd + " new members.");
     }
 
-    public String getStats() {
-        String aString = "\n";
-
-        aString += "---- Your stats are ----\n";
-
-        aString += "Food: " + String.valueOf(food) + "\n\n";
-
-        aString += "Group satiety: " + String.valueOf(this.satiety) + "% \n\n";
-
-        aString += "Group size: " + ((members != null) ? String.valueOf(getGroupSize()) : "No members");
-
-        return aString;
-    }
-
-    public int getGroupSize() {
-        if (this.members != null) {
-            return this.members.size();
-        }
-        else {
-            return 0;
-        }
+    public int getMembers(){
+        return this.members;
     }
 
     public int getFood() {

@@ -5,9 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sdu.software.climatewars.GUI.GameController;
-import sdu.software.climatewars.Text.Parser;
-import sdu.software.climatewars.Text.Command;
-import sdu.software.climatewars.Text.CommandWord;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,16 +12,14 @@ import java.util.*;
 
 public class Game extends Application {
     private final ArrayList<Challenge> challenges;
-    private final Parser parser;
     private Room currentRoom;
     private final Group group;
 
     public Game() {
         this.group = new Group();
-        this.challenges = new ArrayList<Challenge>();
+        this.challenges = new ArrayList<>();
         readFromFile();
         createRooms();
-        parser = new Parser();
     }
 
     @Override
@@ -58,13 +53,13 @@ public class Game extends Application {
         // Hide group encounter as default
         rc.showGroupEncounter(false);
 
-        //Hide exile animation as default - skal bindes til når exile vælges :D
+        //Hide exile animation as default
         rc.showExile(false);
 
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
 
-        rc.showGameOver(false);
+        rc.showGameOver();
 
         // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
         // Der skal være en text input på skærmen, for at kunne detecte key presses
@@ -77,16 +72,16 @@ public class Game extends Application {
     private void createRooms() {
         Room city, forest, cliffs, hilltops, university, club, beach, lake, fields, cornfield;
 
-        city = new Room("City", "in an abandoned city", "City");
-        forest = new Room("Forest", "in a dark forest", getRandomChallenge(), "Forrest");
-        cliffs = new Room("Cliffs", "at the cliffs", getRandomChallenge(), "Cliffs");
-        hilltops = new Room("Hilltops", "at the hilltops by the cliffs", getRandomChallenge(), "Hilltops");
-        university = new Room("University", "in the university", getRandomChallenge(), "University");
-        club = new Room("Club", "in a nightclub", getRandomChallenge(), "Club");
-        beach = new Room("Beach", "at the beach", getRandomChallenge(), "Beach");
-        lake = new Room("Lake", "at the lake", getRandomChallenge(), "Lake");
-        fields = new Room("Fields", "at the fields", getRandomChallenge(), "Field");
-        cornfield = new Room("Cornfield", "in the cornfield", getRandomChallenge(), "Cornfield");
+        city = new Room("City", "City");
+        forest = new Room("Forest", getRandomChallenge(), "Forrest");
+        cliffs = new Room("Cliffs", getRandomChallenge(), "Cliffs");
+        hilltops = new Room("Hilltops", getRandomChallenge(), "Hilltops");
+        university = new Room("University", getRandomChallenge(), "University");
+        club = new Room("Club", getRandomChallenge(), "Club");
+        beach = new Room("Beach", getRandomChallenge(), "Beach");
+        lake = new Room("Lake", getRandomChallenge(), "Lake");
+        fields = new Room("Fields", getRandomChallenge(), "Field");
+        cornfield = new Room("Cornfield", getRandomChallenge(), "Cornfield");
 
         // Abandoned city
         city.setExit("south: Forest", forest);
@@ -131,23 +126,6 @@ public class Game extends Application {
 
     public void play() {
         launch();
-
-        getWelcome();
-
-        boolean finished = false;
-        while (!finished) {
-
-            if (this.group.getGroupSize() == 0) {
-                finished = true;
-                System.out.println();
-                System.out.println("GAME OVER: You group have reached a number of 0.");
-            } else {
-
-                Command command = parser.getCommand();
-
-            }
-        }
-        System.out.println("Thank you for playing. Good bye.");
     }
 
     private void readFromFile() {
@@ -167,7 +145,7 @@ public class Game extends Application {
 
                         data = myReader.nextLine();
                         if (data.contains("Effect")) {
-                            ArrayList<String> cEffect = new ArrayList<String>();
+                            ArrayList<String> cEffect = new ArrayList<>();
                             int e = Integer.parseInt(data.replace("Effect: ", ""));
                             for (int i = 0; i < e; i++) {
                                 data = myReader.nextLine();
@@ -201,23 +179,6 @@ public class Game extends Application {
         Random rand = new Random();
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
-    }
-
-    private String getWelcome() {
-        String aString = "";
-
-        aString += "Welcome to the Climate Wars! \n";
-        aString += "Climate Wars will teach you about the disastrous effects of climate change. \n \n";
-
-        // Back story
-        aString += "Back story: The year is 2130, due to a lack of action from the world as a whole to solve the climate crisis, a climate catastrophe has reached new highs." + "\n" + "This has led to a total collapse of society. Billions are dead due to food shortages, lack of shelter from the increasingly disastrous weather, and wars fought to gather what resources are left on earth." + "\n" + "The survivors that are now left must roam the lands to scavenge and hunt for food and resources. You must lead a group of people through the dangerous and harsh environments." + "\n" + "You will have to manage the needs of your group, making sure that there is enough food and making tough decisions along the way as the leader of the group." + "\n" + "Group members will come and go as you progress, you will meet new people that may join your ranks, and you will lose people as you attempt to endure the dangers of this world." + "\n" + "Your objective is to keep the group of survivors alive as long as possible, but eventually, the climate claims us all.";
-        aString += "Good luck survivor. \n \n";
-
-        aString += "Type '" + CommandWord.HELP + "' if you need help.\n \n";
-        aString += "Your initial stats are: \n";
-        aString += group.getStats();
-        aString += currentRoom.getLongDescription();
-        return aString;
     }
 
 

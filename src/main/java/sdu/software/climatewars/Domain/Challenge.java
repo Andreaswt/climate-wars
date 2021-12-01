@@ -88,7 +88,7 @@ public class Challenge {
         // Each member have a 50% chance of dying during fight
         System.out.println("Your group will fight against " + opponentSize + " opponents, with a 50/50 chance of dying during fight");
         for (int i = 0; i < opponentSize; i++) {
-            if(this.group.getGroupSize() != 0){
+            if(this.group.getMembers() != 0){
                 this.group.killMember(50);
             }
         }
@@ -108,7 +108,7 @@ public class Challenge {
 
     public void killMembers() {
         this.group.killMember(100);
-        if(this.group.getGroupSize()>0)
+        if(this.group.getMembers()>0)
             this.group.killMember(100);
     }
 
