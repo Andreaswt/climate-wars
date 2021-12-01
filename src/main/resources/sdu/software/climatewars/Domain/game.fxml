@@ -251,7 +251,7 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Thank you for playing. Now go safe the world." textFill="WHITE" />
+                  <Label text="Thank you for playing. Now go save the world." textFill="WHITE" />
                   <Button fx:id="quitButton1" mnemonicParsing="false" onAction="#quitAction" text="Quit" />
                </children>
                <BorderPane.margin>
