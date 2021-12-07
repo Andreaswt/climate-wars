@@ -32,7 +32,7 @@ public class GameController {
     Group group;
 
     @FXML
-    private BorderPane menu, optionsMenu, gameOver;
+    private BorderPane startPage, menu, helpMenu, gameOver;
 
     @FXML
     private Pane northDoor, southDoor, eastDoor, westDoor;
@@ -50,9 +50,14 @@ public class GameController {
     private ImageView rain, fox, sun, player, groupEncounter, flood, fighting, exile, backgroundImage;
 
     @FXML
+    protected void continueAction() {
+        startPage.setVisible(false);
+    }
+
+    @FXML
     protected void startAction() {
         menu.setVisible(false);
-        optionsMenu.setVisible(false);
+        helpMenu.setVisible(false);
     }
 
     @FXML
@@ -63,13 +68,13 @@ public class GameController {
     @FXML
     protected void openMenu() {
         menu.setVisible(true);
-        optionsMenu.setVisible(false);
+        helpMenu.setVisible(false);
     }
 
     @FXML
-    protected void openOptions() {
+    protected void openHelp() {
         menu.setVisible(false);
-        optionsMenu.setVisible(true);
+        helpMenu.setVisible(true);
     }
 
     public void showGameOver() { gameOver.setVisible(false); }
