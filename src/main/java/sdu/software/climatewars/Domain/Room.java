@@ -11,13 +11,13 @@ public class Room {
 
     public Room(String name, String bg) {
         this.name = name;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<>();
         backgroundImage = bg;
     }
 
     public Room(String name, Challenge challenge, String bg) {
         this.name = name;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<>();
         this.challenge = challenge;
         backgroundImage = bg;
     }

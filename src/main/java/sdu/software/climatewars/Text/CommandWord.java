@@ -2,7 +2,7 @@ package sdu.software.climatewars.Text;
 
 public enum CommandWord
 {
-    GO("go"), UNKNOWN("?"), FIGHT("fight"), FLEE("flee"), GIVE("give"), MERGE("merge"), EXILE("exile"), NOTHING("nothing");
+    GO("go"), FIGHT("fight"), FLEE("flee"), MERGE("merge"), EXILE("exile"), NOTHING("nothing");
     
     private final String commandString;
     

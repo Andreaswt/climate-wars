@@ -99,29 +99,11 @@ public class Challenge {
     }
 
     public ArrayList<String> getOptions() {
-        ArrayList<String> rString = new ArrayList<String>();
+        ArrayList<String> rString = new ArrayList<>();
         if (this.options != null) {
-            this.options.forEach((k, v) -> {
-                rString.add(k);
-            });
+            this.options.forEach((k, v) -> rString.add(k));
         }
         return rString;
-    }
-
-    @Override
-    public String toString() {
-        String s;
-        s = "\n" + this.name + "\n" + this.description;
-
-        if (this.options != null) {
-            s += "\n" + "\n" + "Your options are:";
-
-            for (String aS : getOptions()) {
-                s += "\n";
-                s += "[" + aS + "]";
-            }
-        }
-        return s;
     }
 
     public int randomGroupSizeGenerator() {
