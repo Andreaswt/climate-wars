@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class Challenge {
     private final String name;
+    private final boolean hasOptions;
+    private final Group group;
     private String description;
     private Map<String, String> options;
     private ArrayList<String> effect;
-    private final boolean hasOptions;
-    private final Group group;
 
     public Challenge(String name, String description, Map<String, String> options, Group group) {
         this.name = name.toUpperCase();

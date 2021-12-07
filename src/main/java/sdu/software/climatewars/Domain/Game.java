@@ -12,8 +12,8 @@ import java.util.*;
 
 public class Game extends Application {
     private final ArrayList<Challenge> challenges;
-    private Room currentRoom;
     private final Group group;
+    private Room currentRoom;
 
     public Game() {
         this.group = new Group();
@@ -60,10 +60,6 @@ public class Game extends Application {
         rc.showStats(true, group);
 
         rc.showGameOver();
-
-        // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
-        // Der skal være en text input på skærmen, for at kunne detecte key presses
-        //rc.hidePetersBox();
 
         stage.setScene(scene);
         stage.show();
@@ -180,7 +176,4 @@ public class Game extends Application {
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
     }
-
-
-
 }

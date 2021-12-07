@@ -3,8 +3,8 @@ package sdu.software.climatewars.Domain;
 import java.util.Random;
 
 public class Group {
-    private int satiety = 100;
     final private int foodSatietyValue = 5;
+    private int satiety = 100;
     private int food;
     private int members;
 
@@ -34,7 +34,6 @@ public class Group {
     }
 
     public void eat() {
-        boolean starvationMessage = true;
         for (int i = 0; i < members; i++) {
             if (this.food > 0){
                 this.food--;
@@ -47,9 +46,6 @@ public class Group {
                     this.satiety -= this.foodSatietyValue;
                 }
                 else{
-                    if (starvationMessage) {
-                        starvationMessage = false;
-                    }
                     killMember(20);
                 }
             }
@@ -57,14 +53,12 @@ public class Group {
     }
 
     public void killMember(double chanceOfDeath) {
-
         // Generate random number, to remove random person member from group and a random number to roll for death
         Random rand = new Random();
         double rollForDeath = rand.nextDouble() * 100;
 
-        if(chanceOfDeath < rollForDeath){
+        if(chanceOfDeath < rollForDeath)
             return;
-        }
 
         this.members--;
     }
