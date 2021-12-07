@@ -12,8 +12,8 @@ import java.util.*;
 
 public class Game extends Application {
     private final ArrayList<Challenge> challenges;
-    private Room currentRoom;
     private final Group group;
+    private Room currentRoom;
 
     public Game() {
         this.group = new Group();

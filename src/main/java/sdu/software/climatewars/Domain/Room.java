@@ -1,16 +1,13 @@
 package sdu.software.climatewars.Domain;
 
-import sdu.software.climatewars.Text.CommandWord;
-
 import java.util.Locale;
-import java.util.Set;
 import java.util.HashMap;
 
 public class Room {
     private final String name;
     private final HashMap<String, Room> exits;
-    private Challenge challenge;
     private final String backgroundImage;
+    private Challenge challenge;
 
     public Room(String name, String bg) {
         this.name = name;
