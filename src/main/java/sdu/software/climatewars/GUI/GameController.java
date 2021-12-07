@@ -3,33 +3,25 @@ package sdu.software.climatewars.GUI;
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import org.controlsfx.control.action.Action;
 import sdu.software.climatewars.Domain.Challenge;
 import sdu.software.climatewars.Domain.Group;
 import sdu.software.climatewars.Domain.Room;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import sdu.software.climatewars.Domain.Room;
 import sdu.software.climatewars.Text.Command;
 import sdu.software.climatewars.Text.CommandWord;
-import sdu.software.climatewars.Text.CommandWords;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -39,133 +31,59 @@ public class GameController {
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
 
-    // Menu features
     @FXML
-    private BorderPane menu;
+    private BorderPane menu, optionsMenu, gameOver;
 
-    @FXML
-    private BorderPane optionsMenu;
-
-    // Game Over scene
-    @FXML
-    private BorderPane gameOver;
-
-    // Background image for room
-    @FXML
-    private ImageView backgroundImage;
-
-    // Doors and their text
     @FXML
     private Pane northDoor, southDoor, eastDoor, westDoor;
 
     @FXML
-    private Label northText, southText, eastText, westText;
-
-    // Scenario text box
-    @FXML
-    private AnchorPane scenarioBox;
+    private Label northText, southText, eastText, westText, foodText, groupSatietyText, groupSizeText, scenarioText, scenarioDescription;
 
     @FXML
-    private Label scenarioText, scenarioDescription;
+    private AnchorPane scenarioBox, statsBox;
 
     @FXML
     private Button optionOneButton, optionTwoButton;
 
-    // Statistics text box
     @FXML
-    private AnchorPane statsBox;
+    private ImageView rain, fox, sun, player, groupEncounter, flood, fighting, exile, backgroundImage;
 
     @FXML
-    private Label statsText, foodText, groupSatietyText, groupSizeText;
-
-    // Bottom right corner text box
-    @FXML
-    private AnchorPane textBox1;
-
-    @FXML
-    private Label title1;
-
-    @FXML
-    private Label description1;
-
-    @FXML
-    private Button button1;
-
-    @FXML
-    private TextArea textInput1;
-
-    // Rain
-    @FXML
-    private ImageView rain;
-
-    // Fox
-    @FXML
-    private ImageView fox;
-
-    // Sun
-    @FXML
-    private ImageView sun;
-
-    // Character
-    @FXML
-    private ImageView player;
-
-    // Group encounter
-    @FXML
-    private ImageView groupEncounter;
-
-    // Flood
-    @FXML
-    private ImageView flood;
-
-    // Fighting
-    @FXML
-    private ImageView fighting;
-
-    // Exile
-    @FXML
-    private ImageView exile;
-
-    @FXML
-    protected void startAction(ActionEvent actionEvent) {
+    protected void startAction() {
         menu.setVisible(false);
         optionsMenu.setVisible(false);
     }
 
     @FXML
-    protected void quitAction(ActionEvent actionEvent) {
+    protected void quitAction() {
         System.exit(0);
     }
 
     @FXML
-    protected void openMenu(ActionEvent esc) {
+    protected void openMenu() {
         menu.setVisible(true);
         optionsMenu.setVisible(false);
     }
 
     @FXML
-    protected void openOptions(ActionEvent options) {
+    protected void openOptions() {
         menu.setVisible(false);
         optionsMenu.setVisible(true);
     }
 
-    public void showGameOver(Boolean show) { gameOver.setVisible(false); }
+    public void showGameOver() { gameOver.setVisible(false); }
 
     @FXML
-    protected void optionOneAction(ActionEvent actionEvent) {
+    protected void optionOneAction() {
         CommandWord commandWord = CommandWord.valueOf( currentRoom.upperCaseOption(0));
         processCommand(new Command(commandWord, ""));
     }
 
     @FXML
-    protected void optionTwoAction(ActionEvent actionEvent) {
+    protected void optionTwoAction() {
         CommandWord commandWord = CommandWord.valueOf( currentRoom.upperCaseOption(1));
         processCommand(new Command(commandWord, ""));
-    }
-
-    @FXML
-    protected void button1Action(ActionEvent actionEvent) {
-        System.out.println("Button 1 activated");
     }
 
     @FXML
@@ -223,7 +141,6 @@ public class GameController {
                 showWest(true, key.replace("west: ", ""));
             }
         }
-
         loadNewScene(currentRoom);
     }
 
@@ -237,7 +154,6 @@ public class GameController {
             // Check if player walked into door, and change scene hereafter
             checkDoorCollision();
         }
-
     }
 
     // Collision detection
@@ -261,17 +177,14 @@ public class GameController {
             processCommand(new Command( CommandWord.GO, westRoom.getName()));
             setupRoom(westRoom);
             setPlayerDefaultPosition();
-
         }
     }
 
     public void loadNewScene(Room room) {
-
         setBackgroundImage(room.getBackgroundImage());
 
         // First room "City", won't have a challenge
         showScenario(room.getChallenge() != null, room);
-
     }
 
     public void setBackgroundImage(String backgroundName) {
@@ -283,13 +196,6 @@ public class GameController {
         } catch (FileNotFoundException e) {
             System.out.println("Background not found");
         }
-    }
-
-    public void setCharacterImageImage(String characterName) throws FileNotFoundException {
-        String characterPath = "src/main/resources/character/" + characterName + ".png";
-        FileInputStream inputStream = new FileInputStream(characterPath);
-        Image character = new Image(inputStream);
-        this.player.setImage(character);
     }
 
     public void showStats(Boolean show, Group group) {
@@ -304,9 +210,9 @@ public class GameController {
         statsBox.setVisible(show);
 
         // Set text
-        groupSatietyText.setText(String.valueOf("Group satiety: " + this.group.getSatiety()));
-        groupSizeText.setText(String.valueOf("Group size: " + this.group.getGroupSize()));
-        foodText.setText(String.valueOf("Food: " + this.group.getFood()));
+        groupSatietyText.setText("Group satiety: " + this.group.getSatiety());
+        groupSizeText.setText("Group size: " + this.group.getMembers());
+        foodText.setText("Food: " + this.group.getFood());
     }
 
     public void showScenario(Boolean show, Room room) {
@@ -381,13 +287,13 @@ public class GameController {
         if(show) {
             TranslateTransition translateTransitionRain = new TranslateTransition();
             translateTransitionRain.setNode(rain);
-            rain.setVisible(show);
+            rain.setVisible(true);
             translateTransitionRain.setByY(100);
             translateTransitionRain.setDuration(Duration.millis(1000));
             translateTransitionRain.setCycleCount(Animation.INDEFINITE);
             translateTransitionRain.play();
         } else {
-            rain.setVisible(show);
+            rain.setVisible(false);
             rain.setTranslateX(0.0);
             rain.setTranslateY(0.0);
         }
@@ -397,14 +303,14 @@ public class GameController {
         if(show) {
             TranslateTransition translateTransitionFox = new TranslateTransition();
             translateTransitionFox.setNode(fox);
-            fox.setVisible(show);
+            fox.setVisible(true);
             translateTransitionFox.setByX(350);
             translateTransitionFox.setByY(150);
             translateTransitionFox.setDuration(Duration.millis(2000));
             translateTransitionFox.isAutoReverse();
             translateTransitionFox.play();
         } else {
-            fox.setVisible(show);
+            fox.setVisible(false);
             fox.setTranslateX(0.0);
             fox.setTranslateY(0.0);
         }
@@ -486,14 +392,6 @@ public class GameController {
         }
     }
 
-    public void hidePetersBox() {
-        textBox1.setVisible(false);
-        title1.setVisible(false);
-        description1.setVisible(false);
-        button1.setVisible(false);
-        textInput1.setVisible(false);
-    }
-
     public void setGroup(Group group){
         this.group = group;
     }
@@ -502,63 +400,31 @@ public class GameController {
         this.challenges = c;
     }
 
-    private boolean processCommand(Command command) {
+    private void processCommand(Command command) {
         if (currentRoom.getChallenge() != null && !currentRoom.getChallenge().getHasOptions()) {
             this.currentRoom.setChallenge(null);
         }
 
-        boolean wantToQuit = false;
-
         CommandWord commandWord = command.getCommandWord();
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        } else if (commandWord == CommandWord.GO && currentRoom.getChallenge() == null) {
+        if (commandWord == CommandWord.GO && currentRoom.getChallenge() == null) {
             group.eat();
             goRoom(command);
-        } else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.STATS) {
-            group.getStats();
-        } else {
-            if (commandWord == CommandWord.UNKNOWN) {
-                System.out.println("I don't know what you mean...");
-                return false;
-            }
+        }  else {
             if (currentRoom.getChallenge() != null) {
                 for (String s : currentRoom.getChallenge().getOptions()) {
                     if (s.contains(commandWord.getCommandString())) {
                         applyEffect(commandWord);
-                        group.getStats();
                         showStats(true, group);
                         currentRoom.setChallenge(null);
-                        return wantToQuit;
                     }
                 }
             }
-            System.out.println("Trying to cheat are we? Not on my watch");
-            return false;
         }
-        return wantToQuit;
-    }
-
-    private void printHelp() {
-        System.out.println();
-        System.out.println("\"\033[3mThe climate have changed...");
-        System.out.println("For the worse");
-        System.out.println("Lead your group to survival.\"\033[0m");
-        System.out.println();
-        System.out.println("Move through the world by typing in command words");
-        System.out.println("You can use the following commands:");
-        System.out.println("-------------------------------------------------");
-        System.out.println("[go] + [go option] -> e.g 'go forest' \n[help] \n[quit] \n[stats]");
-        System.out.println("-------------------------------------------------");
-        System.out.println();
     }
 
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
             return;
         }
 
@@ -566,41 +432,24 @@ public class GameController {
 
         Room nextRoom = currentRoom.getExitName(direction);
 
-        if (nextRoom == null) {
-            System.out.println("You can't go there!");
-        } else {
-            System.out.println("------------------ You are here ------------------");
-            currentRoom.setChallenge(getRandomChallenge());
-            unApplyEffets();
-            currentRoom = nextRoom;
+        currentRoom.setChallenge(getRandomChallenge());
+        unApplyEffets();
+        currentRoom = nextRoom;
 
-            // When entering a new place, there's 25% chance of finding a new person
-            Random rand = new Random();
-            double rollForNewMember = rand.nextInt(100);
+        // When entering a new place, there's 25% chance of finding a new person
+        Random rand = new Random();
+        double rollForNewMember = rand.nextInt(100);
 
-            if (rollForNewMember <= 25) {
-                System.out.println("You found a lone member straying around, and invited him to join the group.");
-                this.group.addToGroup(1);
-            }
-
-
-            System.out.println(currentRoom.getLongDescription());
-            applyEffect();
-            showStats(true, group);
+        if (rollForNewMember <= 25) {
+            this.group.addToGroup(1);
         }
-    }
 
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
+        applyEffect();
+        showStats(true, group);
     }
 
     private void tryQuit(){
-        if(group.getGroupSize() <= 0){
+        if(group.getMembers() <= 0){
             gameOver.setVisible(true);
         }
    }
@@ -613,28 +462,13 @@ public class GameController {
 
     private void applyEffect(){
         this.currentRoom.getChallenge().applyEffect();
-        switch (this.currentRoom.getChallenge().getName()){
-            case "HEAT WAVE":
-                showSun(true);
-                break;
-            case "TORRENTIAL RAIN":
-                showRain(true);
-                break;
-            case "SUDDEN FLOOD":
-                showFlood(true);
-                break;
-            case "HOSTILE GROUP ENCOUNTER":
-            case "HELP SEEKING GROUP ENCOUNTER":
-            case "GOOD GROUP ENCOUNTER":
-                showGroupEncounter(true);
-                break;
-            case "FOX BITE":
-                showFox(true);
-                break;
-            case "FIGHTING":
-                showFighting(true);
-                break;
-
+        switch (this.currentRoom.getChallenge().getName()) {
+            case "HEAT WAVE" -> showSun(true);
+            case "TORRENTIAL RAIN" -> showRain(true);
+            case "SUDDEN FLOOD" -> showFlood(true);
+            case "HOSTILE GROUP ENCOUNTER", "HELP SEEKING GROUP ENCOUNTER", "GOOD GROUP ENCOUNTER" -> showGroupEncounter(true);
+            case "FOX BITE" -> showFox(true);
+            case "FIGHTING" -> showFighting(true);
         }
         tryQuit();
         updateGroupPic();
@@ -675,7 +509,7 @@ public class GameController {
 
     private void updateGroupPic(){
         try {
-            String backgroundPath = "src/main/resources/Anton/Anton" + this.group.getGroupSize() + ".png";
+            String backgroundPath = "src/main/resources/Anton/Anton" + this.group.getMembers() + ".png";
             FileInputStream inputStream = new FileInputStream(backgroundPath);
             Image background = new Image(inputStream);
             this.player.setImage(background);
