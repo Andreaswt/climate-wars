@@ -40,11 +40,6 @@ public class Command
         return secondWord;
     }
 
-    public boolean isUnknown()
-    {
-        return (commandWord == CommandWord.UNKNOWN);
-    }
-
     public boolean hasSecondWord()
     {
         return (secondWord != null);

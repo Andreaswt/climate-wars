@@ -438,7 +438,7 @@ public class GameController {
         Room nextRoom = currentRoom.getExitName(direction);
 
         currentRoom.setChallenge(getRandomChallenge());
-        unApplyEffets();
+        unApplyEffects();
         currentRoom = nextRoom;
 
         // When entering a new place, there's 25% chance of finding a new person
@@ -502,7 +502,7 @@ public class GameController {
         updateGroupPic();
     }
 
-    private void unApplyEffets(){
+    private void unApplyEffects(){
         showFighting(false);
         showFox(false);
         showFlood(false);

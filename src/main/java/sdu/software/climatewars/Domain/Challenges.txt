@@ -28,7 +28,7 @@ Options: 2
 fight: Fight
 flee: Flee
 
-Title: Help seeking group encounter
+Title: Help-seeking group encounter
 Your group has encountered another group of survivors numbering XX people, the people have no food, no hope, and they are starving. They ask to join your group. You must choose whether to flee from the group or merge together.
 Options: 2
 merge: Merge
