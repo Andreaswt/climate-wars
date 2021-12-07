@@ -141,7 +141,6 @@ public class GameController {
                 showWest(true, key.replace("west: ", ""));
             }
         }
-
         loadNewScene(currentRoom);
     }
 
@@ -155,7 +154,6 @@ public class GameController {
             // Check if player walked into door, and change scene hereafter
             checkDoorCollision();
         }
-
     }
 
     // Collision detection
@@ -179,17 +177,14 @@ public class GameController {
             processCommand(new Command( CommandWord.GO, westRoom.getName()));
             setupRoom(westRoom);
             setPlayerDefaultPosition();
-
         }
     }
 
     public void loadNewScene(Room room) {
-
         setBackgroundImage(room.getBackgroundImage());
 
         // First room "City", won't have a challenge
         showScenario(room.getChallenge() != null, room);
-
     }
 
     public void setBackgroundImage(String backgroundName) {
@@ -425,7 +420,6 @@ public class GameController {
                     }
                 }
             }
-
         }
     }
 

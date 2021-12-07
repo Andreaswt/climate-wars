@@ -30,6 +30,7 @@ public class Room {
     }
 
     public Room getExitName(String direction) {
+
         if(exits.containsKey("north: " + direction)){
             return exits.get("north: " + direction);
         } else if(exits.containsKey("south: " + direction)){
@@ -39,6 +40,7 @@ public class Room {
         } else if(exits.containsKey("east: " + direction)){
             return exits.get("east: " + direction);
         } else
+
         return exits.get(direction);
     }
 

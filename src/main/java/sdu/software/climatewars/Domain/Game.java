@@ -35,35 +35,18 @@ public class Game extends Application {
         rc.setGroup(this.group);
         rc.setupRoom(this.currentRoom);
 
-        // Hide rain as default
+        // Hide challenge conditions as default
         rc.showRain(false);
-
-        // Hide fox as default
         rc.showFox(false);
-
-        // Hide sun as default
         rc.showSun(false);
-
-        // Hide fighting as default
         rc.showFighting(false);
-
-        // Hide flood as default
         rc.showFlood(false);
-
-        // Hide group encounter as default
         rc.showGroupEncounter(false);
-
-        //Hide exile animation as default
         rc.showExile(false);
+        rc.showGameOver();
 
         // Pass group into controller, to post data in stats box
         rc.showStats(true, group);
-
-        rc.showGameOver();
-
-        // Hvis Peters boks fjernes, kan man ikke bevæge spilleren.
-        // Der skal være en text input på skærmen, for at kunne detecte key presses
-        //rc.hidePetersBox();
 
         stage.setScene(scene);
         stage.show();
@@ -129,7 +112,7 @@ public class Game extends Application {
     }
 
     private void readFromFile() {
-        //Read file
+        // Read file
         try {
             File myObj = new File("src/main/java/sdu/software/climatewars/Domain/Challenges.txt");
             Scanner myReader = new Scanner(myObj);
@@ -164,7 +147,6 @@ public class Game extends Application {
                             }
                             this.challenges.add(new Challenge(cName, cDescription, cOptions, this.group));
                         }
-
                     }
                 }
             }
@@ -180,7 +162,4 @@ public class Game extends Application {
         int index = rand.nextInt(this.challenges.size());
         return this.challenges.get(index);
     }
-
-
-
 }

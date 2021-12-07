@@ -46,24 +46,11 @@ public class Challenge {
         if (this.options.containsKey(option)) {
             String effect = this.options.get(option);
             switch (effect) {
-                case "Kill member":
-                case "Exile":
-                    killMember();
-                    break;
-                case "Fight":
-                    fight();
-                    break;
-                case "Flee":
-                    flee();
-                    break;
-                case "Kill members":
-                    killMembers();
-                    break;
-                case "Merge":
-                    merge();
-                    break;
-                case "Nothing":
-                    break;
+                case "Kill member", "Exile" -> killMember();
+                case "Fight" -> fight();
+                case "Flee" -> flee();
+                case "Kill members" -> killMembers();
+                case "Merge" -> merge();
             }
         }
     }

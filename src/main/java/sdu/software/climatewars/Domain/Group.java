@@ -65,7 +65,6 @@ public class Group {
         if(chanceOfDeath < rollForDeath){
             return;
         }
-
         this.members--;
     }
 
