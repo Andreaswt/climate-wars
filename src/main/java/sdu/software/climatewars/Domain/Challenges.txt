@@ -1,18 +1,18 @@
 $Parts with dollar sign will be ignored
 
 Title: Heat wave
-The weather sure seems to get hotter, a heat wave is incoming. The heat is unbearable, and your people are having difficulty doing anything in this heat. People risk dying from strokes, risk is increased with intensive activities.
+The weather sure seems to get hotter, a heat wave is incoming. The heat is unbearable, and your people are having difficulty doing anything in this heat. Someone died because the individual got a stroke.
 Effect: 1
 Kill member
 
 
 Title: Torrential rain
-Clouds are gathering fast, and it looks like a storm is incoming. Your group is struck by torrential rain. People are at risk dying from disease, risk is increased if activities are done.
+Clouds are gathering fast, and it looks like a storm is incoming. Your group is struck by torrential rain. Someone got sick and died.
 Effect: 1
 Kill member
 
 Title: Sudden flood
-This whole area is flooded. You lose some food.
+This whole area is flooded. Your people have to spend much more time traversing the terrain now. Less food will be gathered.
 Effect: 1
 Remove food
 
