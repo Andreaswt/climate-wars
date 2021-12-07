@@ -36,10 +36,7 @@ public class Challenge {
             for (String s : this.effect) {
                 switch (s) {
                     case "Kill member" -> killMember();
-                    case "Remove people and food" -> removeFoodAndPeople();
-                    case "Fight" -> fight();
-                    case "Flee" -> flee();
-                    case "Kill members" -> killMembers();
+                    case "Remove food" -> removeFood();
                 }
             }
         }
@@ -52,10 +49,6 @@ public class Challenge {
                 case "Kill member":
                 case "Exile":
                     killMember();
-                    break;
-                case "Remove people and food":
-                case "Give":
-                    removeFoodAndPeople();
                     break;
                 case "Fight":
                     fight();
@@ -110,10 +103,8 @@ public class Challenge {
             this.group.killMember(100);
     }
 
-    public void removeFoodAndPeople() {
-        this.group.removeFood(10);
-        this.group.killMember(100);
-        this.group.killMember(100);
+    public void removeFood() {
+        this.group.removeFood(3);
     }
 
     public boolean getHasOptions() {

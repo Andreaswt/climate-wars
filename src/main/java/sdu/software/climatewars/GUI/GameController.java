@@ -11,7 +11,6 @@ import sdu.software.climatewars.Domain.Group;
 import sdu.software.climatewars.Domain.Room;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -32,92 +31,23 @@ public class GameController {
     Room northRoom, southRoom, eastRoom, westRoom;
     Group group;
 
-    // Menu features
     @FXML
-    private BorderPane menu;
+    private BorderPane menu, optionsMenu, gameOver;
 
-    @FXML
-    private BorderPane optionsMenu;
-
-    // Game Over scene
-    @FXML
-    private BorderPane gameOver;
-
-    // Background image for room
-    @FXML
-    private ImageView backgroundImage;
-
-    // Doors and their text
     @FXML
     private Pane northDoor, southDoor, eastDoor, westDoor;
 
     @FXML
-    private Label northText, southText, eastText, westText;
-
-    // Scenario text box
-    @FXML
-    private AnchorPane scenarioBox;
+    private Label northText, southText, eastText, westText, foodText, groupSatietyText, groupSizeText, scenarioText, scenarioDescription;
 
     @FXML
-    private Label scenarioText, scenarioDescription;
+    private AnchorPane scenarioBox, statsBox;
 
     @FXML
     private Button optionOneButton, optionTwoButton;
 
-    // Statistics text box
     @FXML
-    private AnchorPane statsBox;
-
-    @FXML
-    private Label foodText, groupSatietyText, groupSizeText;
-
-    // Bottom right corner text box
-    @FXML
-    private AnchorPane textBox1;
-
-    @FXML
-    private Label title1;
-
-    @FXML
-    private Label description1;
-
-    @FXML
-    private Button button1;
-
-    @FXML
-    private TextArea textInput1;
-
-    // Rain
-    @FXML
-    private ImageView rain;
-
-    // Fox
-    @FXML
-    private ImageView fox;
-
-    // Sun
-    @FXML
-    private ImageView sun;
-
-    // Character
-    @FXML
-    private ImageView player;
-
-    // Group encounter
-    @FXML
-    private ImageView groupEncounter;
-
-    // Flood
-    @FXML
-    private ImageView flood;
-
-    // Fighting
-    @FXML
-    private ImageView fighting;
-
-    // Exile
-    @FXML
-    private ImageView exile;
+    private ImageView rain, fox, sun, player, groupEncounter, flood, fighting, exile, backgroundImage;
 
     @FXML
     protected void startAction() {
@@ -157,11 +87,6 @@ public class GameController {
     }
 
     @FXML
-    protected void button1Action() {
-        System.out.println("Button 1 activated");
-    }
-
-    @FXML
     private void handleOnKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
             case UP -> movePlayer(0, -10);
@@ -183,7 +108,6 @@ public class GameController {
     }
 
     public void setupRoom(Room currentRoom) {
-        hidePetersBox();
         this.currentRoom = currentRoom;
 
         // Clear all doors
@@ -471,14 +395,6 @@ public class GameController {
             exile.setTranslateX(0.0);
             exile.setTranslateY(0.0);
         }
-    }
-
-    public void hidePetersBox() {
-        textBox1.setVisible(false);
-        title1.setVisible(false);
-        description1.setVisible(false);
-        button1.setVisible(false);
-        textInput1.setVisible(false);
     }
 
     public void setGroup(Group group){

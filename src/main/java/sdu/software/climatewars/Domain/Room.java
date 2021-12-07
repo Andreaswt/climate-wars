@@ -10,7 +10,7 @@ public class Room {
     private final String name;
     private final HashMap<String, Room> exits;
     private Challenge challenge;
-    private String backgroundImage;
+    private final String backgroundImage;
 
     public Room(String name, String bg) {
         this.name = name;

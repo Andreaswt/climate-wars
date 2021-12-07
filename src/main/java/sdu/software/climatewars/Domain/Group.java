@@ -1,6 +1,5 @@
 package sdu.software.climatewars.Domain;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Group {
@@ -48,7 +47,7 @@ public class Group {
                     this.satiety -= this.foodSatietyValue;
                 }
                 else{
-                    if (starvationMessage == true) {
+                    if (starvationMessage) {
                         starvationMessage = false;
                     }
                     killMember(20);
