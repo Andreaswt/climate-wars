@@ -94,10 +94,10 @@ public class GameController {
     @FXML
     private void handleOnKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
-            case UP -> movePlayer(0, -10);
-            case DOWN -> movePlayer(0, 10);
-            case LEFT -> movePlayer(-10, 0);
-            case RIGHT -> movePlayer(10, 0);
+            case W -> movePlayer(0, -10);
+            case S -> movePlayer(0, 10);
+            case A -> movePlayer(-10, 0);
+            case D -> movePlayer(10, 0);
             case ESCAPE -> menu.setVisible(true);
         }
     }
@@ -105,10 +105,10 @@ public class GameController {
     @FXML
     private void handleOnKeyReleased(KeyEvent event) {
         switch (event.getCode()) {
-            case UP -> movePlayer(0, -10);
-            case DOWN -> movePlayer(0, 10);
-            case LEFT -> movePlayer(-10, 0);
-            case RIGHT -> movePlayer(10, 0);
+            case W -> movePlayer(0, -10);
+            case S -> movePlayer(0, 10);
+            case A -> movePlayer(-10, 0);
+            case D -> movePlayer(10, 0);
         }
     }
 
@@ -422,6 +422,7 @@ public class GameController {
                         applyEffect(commandWord);
                         showStats(true, group);
                         currentRoom.setChallenge(null);
+                        scenarioBox.setVisible(false);
                     }
                 }
             }
